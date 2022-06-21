@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="statusBarBgColor">#FFFFFF</color>
+    <color name="actionBarBgColor">#FFFFFF</color>
+    <color name="actionBarShadowColor">#E0E0E0</color>
+
+    <color name="questionOfDayBgColor">#F7F7F7</color>
+    <color name="questionOfDayTxtColor">#FFA4A4</color>
+    
+    <color name="fragmentTabLayoutBgColor">#F7F7F7</color>
+    <color name="fragmentTabLayoutShadowColor">#E5E5E5</color>
+    <color name="fragmentTabLayoutSelectedTxtColor">#3A97BF</color>
+    <color name="fragmentTabLayoutTxtColor">#50AFCC</color>
+    
+    <color name="testCardItemBgColor">#FFFFFF</color>
+    <color name="testCardItemShadowColor">#E0E0E0</color>
+    <color name="testCardItemTitleColor">#24688E</color>
+    <color name="testCardItemSubTitleColor">#3A97BF</color>
+    <color name="testCardItemSubTitle2Color">#50AFCC</color>
+
+    <color name="type1TxtColor">#B7B7B7</color>
+    <color name="type1BgColor">#FFFFFF</color>
+    <color name="type1ShadowColor">#E0E0E0</color>
+
+    <color name="type2TxtColor">#B7B7B7</color>
+    <color name="type2BgColor">#FFFFFF</color>
+    <color name="type2ShadowColor">#E0E0E0</color>
+
+    <color name="type3TxtColor">#B7B7B7</color>
+    <color name="type3BgColor">#FFFFFF</color>
+    <color name="type3ShadowColor">#E0E0E0</color>
+
+    <color name="type4TxtColor">#000000</color>
+    <color name="type4BgColor">#E0E0E0</color>
+    <color name="type4ShadowColor">#B7B7B7</color>
+    
+    <color name="signTitleTxtColor">#3A97BF</color>
+    <color name="signEditBgColor">#FFFFFF</color>
+    <color name="signEditShadowColor">#50AFCC</color>
+    <color name="signEditTxtColor">#3A97BF</color>
+    <color name="signBtnBgColor">#50AFCC</color>
+    <color name="signBtnShadowColor">#71D2E2</color>
+    <color name="signBtnTxtColor">#FFFFFF</color>
+    <color name="signForgotPasswordTxtColor">#3A97BF</color>
+
+    <color name="dialogBgColor">#FFFFFF</color>
+    <color name="dialogTitleTxtColor">#3A97BF</color>
+    <color name="dialogTxtColor">#50AFCC</color>
+    <color name="dialogBtnBgColor">#50AFCC</color>
+    <color name="dialogBtnShadowColor">#71D2E2</color>
+    <color name="dialogBtnTxtColor">#FFFFFF</color>
+</resources>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <data>
+        <variable
+            name="test"
+            type="com.nexis.aybike.model.Test" />
+    </data>
+    
+<LinearLayout 
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingEnd="10dp"
+    android:paddingStart="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="0.9"
+            android:scaleType="centerCrop"
+            android:downloadImg="@{test.testImageUrl}"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1.1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center_horizontal"
+                android:textColor="@color/testCardItemTitleColor"
+                android:text="@{test.testTitle}"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:weightSum="2"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="2.1b"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/poppins_black"
+                        android:textColor="@color/testCardItemSubTitleColor"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="Görüntüleme"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/poppins_black"
+                        android:textColor="@color/testCardItemSubTitle2Color"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_marginTop="3dp"
+                        android:src="@drawable/filled_star_icon"
+                        android:layout_height="24dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="2.1b"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/poppins_black"
+                        android:textColor="@color/testCardItemSubTitleColor"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="Beğeni"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/poppins_black"
+                        android:textColor="@color/testCardItemSubTitle2Color"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_marginTop="3dp"
+                        android:src="@drawable/filled_heart_icon"
+                        android:layout_height="24dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@color/testCardItemShadowColor"
+        android:layout_height="3dp"/>
+
+</LinearLayout>
+
+</layout>

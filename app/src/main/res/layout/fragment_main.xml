@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MainFragment">
+
+    <include
+        layout="@layout/aybike_action_bar"
+        android:id="@+id/aybike_action_toolBar"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:textSize="17sp"
+        android:padding="15dp"
+        android:id="@+id/main_fragment_txtQuestionOfDay"
+        android:layout_below="@+id/aybike_action_toolBar"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/questionOfDayTxtColor"
+        android:gravity="center"
+        android:text="Günün Sorusu Kalan Süre: 12:24:53"
+        android:background="@color/questionOfDayBgColor"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/main_fragment_tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_fragment_txtQuestionOfDay"
+        android:background="@color/fragmentTabLayoutBgColor"
+        app:tabIndicatorColor="@color/fragmentTabLayoutShadowColor"
+        app:tabSelectedTextColor="@color/fragmentTabLayoutSelectedTxtColor"
+        app:tabTextAppearance="@style/tab_text"
+        app:tabTextColor="@color/fragmentTabLayoutTxtColor" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:id="@+id/main_fragment_viewPager"
+        android:layout_below="@+id/main_fragment_tabLayout"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>
+
+</layout>

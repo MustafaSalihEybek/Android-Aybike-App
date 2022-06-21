@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/signFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.nexis.aybike.view.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_questionsFragment"
+            app:destination="@id/questionsFragment" />
+        <argument
+            android:name="userId"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_mainFragment_to_signFragment2"
+            app:destination="@id/signFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/questionsFragment"
+        android:name="com.nexis.aybike.view.question.QuestionsFragment"
+        android:label="QuestionsFragment" >
+        <argument
+            android:name="subCategoryId"
+            app:argType="string" />
+        <argument
+            android:name="categoryId"
+            app:argType="string" />
+        <argument
+            android:name="testData"
+            app:argType="com.nexis.aybike.model.Test" />
+        <action
+            android:id="@+id/action_questionsFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <argument
+            android:name="userId"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_questionsFragment_self"
+            app:destination="@id/questionsFragment" />
+        <action
+            android:id="@+id/action_questionsFragment_to_signFragment"
+            app:destination="@id/signFragment" />
+        <action
+            android:id="@+id/action_questionsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signFragment"
+        android:name="com.nexis.aybike.view.sign.SignFragment"
+        android:label="SignFragment" >
+        <argument
+            android:name="signState"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <action
+            android:id="@+id/action_signFragment_to_mainFragment2"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.nexis.aybike.view.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <argument
+            android:name="userId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+</navigation>

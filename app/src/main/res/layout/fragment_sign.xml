@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.sign.SignFragment">
+
+    <include
+        layout="@layout/aybike_action_bar"
+        android:id="@+id/aybike_action_toolBar"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:id="@+id/sign_fragment_viewPager"
+        android:layout_below="@+id/aybike_action_toolBar"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>
+
+</layout>

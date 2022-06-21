@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/action_bar_bg"
+    android:id="@+id/aybike_action_toolBar"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/app_title_img"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:layout_width="24dp"
+        android:id="@+id/aybike_action_bar_imgProfile"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/profile_icon"
+        android:visibility="gone"
+        android:layout_gravity="end"
+        android:layout_height="24dp"/>
+
+    <ImageView
+        android:layout_width="36dp"
+        android:visibility="gone"
+        android:id="@+id/aybike_action_bar_imgClose"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/close_icon"
+        android:layout_gravity="end"
+        android:layout_height="36dp"/>
+
+    <ImageView
+        android:layout_width="24dp"
+        android:visibility="gone"
+        android:id="@+id/aybike_action_bar_imgHome"
+        android:src="@drawable/home_icon"
+        android:layout_height="24dp"/>
+
+</androidx.appcompat.widget.Toolbar>

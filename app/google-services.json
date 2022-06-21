@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "642925802083",
+    "project_id": "aybike-caeda",
+    "storage_bucket": "aybike-caeda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642925802083:android:d9f35b6aa2630cf7ea3e56",
+        "android_client_info": {
+          "package_name": "com.nexis.aybike"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642925802083-4e7anl3kudc0i66bmddeq01fj1aua671.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaF8bb5apUu_MusDYgLCdUW_Vq7arlIQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642925802083-4e7anl3kudc0i66bmddeq01fj1aua671.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

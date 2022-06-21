@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Aybike</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="GenderList">
+        <item>Erkek</item>
+        <item>Kadın</item>
+        <item>Belirtmek İstemiyorum</item>
+    </string-array>
+</resources>

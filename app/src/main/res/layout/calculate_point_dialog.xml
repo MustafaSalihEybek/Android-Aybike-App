@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:layout_width="360dp"
+    android:background="@drawable/dialog_bg"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Tebrikler!"
+        android:textSize="33sp"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/dialogTitleTxtColor"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="73 Şöhret Kazandınız"
+        android:textSize="21sp"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/dialogTxtColor"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_marginTop="25dp"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:id="@+id/calculate_point_dialog_btnRestart"
+            android:layout_marginEnd="15dp"
+            android:textAllCaps="false"
+            android:background="@drawable/dialog_btn_bg"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/dialogBtnTxtColor"
+            android:text="Testi Tekrarla"
+            android:layout_height="match_parent"
+            app:backgroundTint="@null"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/calculate_point_dialog_btnBackHome"
+            android:textSize="16sp"
+            android:layout_marginStart="15dp"
+            android:textAllCaps="false"
+            android:background="@drawable/dialog_btn_bg"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/dialogBtnTxtColor"
+            android:text="Anasayfaya Dön"
+            android:layout_height="match_parent"
+            app:backgroundTint="@null"/>
+
+    </LinearLayout>
+
+</LinearLayout>

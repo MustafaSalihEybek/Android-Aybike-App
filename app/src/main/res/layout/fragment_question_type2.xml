@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".view.question.QuestionType2Fragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:textSize="21sp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/question_type2_fragment_txtQuestionContent"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/black"
+        android:fontFamily="@font/poppins_bold"
+        android:text="1-)Soru text Soru text Soru text\nSoru text Soru text Soru text"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:weightSum="2"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_marginEnd="7.5dp"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/question_type2_bg"
+            android:layout_height="230dp">
+
+            <ImageView
+                android:id="@+id/question_type2_fragment_imgAnswer1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/question_type2_fragment_txtAnswer1"
+                android:layout_alignParentTop="true"
+                android:scaleType="centerCrop"
+                android:src="@color/type2ShadowColor" />
+
+            <TextView
+                android:id="@+id/question_type2_fragment_txtAnswer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/poppins_black"
+                android:text="Cevap"
+                android:textColor="@color/type2TxtColor"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/question_type2_fragment_txtChoice1"
+                android:background="@drawable/question_choice_bg"
+                android:fontFamily="@font/poppins_black"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="5dp"
+                android:text="A"
+                android:textColor="@color/type2TxtColor"
+                android:textSize="19sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="7.5dp"
+            android:layout_weight="1"
+            android:background="@drawable/question_type2_bg"
+            android:layout_height="230dp">
+
+            <ImageView
+                android:id="@+id/question_type2_fragment_imgAnswer2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/question_type2_fragment_txtAnswer2"
+                android:layout_alignParentTop="true"
+                android:scaleType="centerCrop"
+                android:src="@color/type2ShadowColor" />
+
+            <TextView
+                android:id="@+id/question_type2_fragment_txtAnswer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/poppins_black"
+                android:text="Cevap"
+                android:textColor="@color/type2TxtColor"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="B"
+                android:textSize="19sp"
+                android:id="@+id/question_type2_fragment_txtChoice2"
+                android:paddingStart="10dp"
+                android:paddingEnd="15dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/question_choice_bg"
+                android:fontFamily="@font/poppins_black"
+                android:textColor="@color/type2TxtColor"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:weightSum="2"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_marginEnd="7.5dp"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/question_type2_bg"
+            android:layout_height="230dp">
+
+            <ImageView
+                android:id="@+id/question_type2_fragment_imgAnswer3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/question_type2_fragment_txtAnswer3"
+                android:layout_alignParentTop="true"
+                android:scaleType="centerCrop"
+                android:src="@color/type2ShadowColor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Cevap"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/question_type2_fragment_txtAnswer3"
+                android:fontFamily="@font/poppins_black"
+                android:textSize="16sp"
+                android:textColor="@color/type2TxtColor"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/question_choice_bg"
+                android:fontFamily="@font/poppins_black"
+                android:id="@+id/question_type2_fragment_txtChoice3"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="5dp"
+                android:text="C"
+                android:textColor="@color/type2TxtColor"
+                android:textSize="19sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="7.5dp"
+            android:layout_weight="1"
+            android:background="@drawable/question_type2_bg"
+            android:layout_height="230dp">
+
+            <ImageView
+                android:id="@+id/question_type2_fragment_imgAnswer4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/question_type2_fragment_txtAnswer4"
+                android:layout_alignParentTop="true"
+                android:scaleType="centerCrop"
+                android:src="@color/type2ShadowColor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Cevap"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/question_type2_fragment_txtAnswer4"
+                android:fontFamily="@font/poppins_black"
+                android:textSize="16sp"
+                android:textColor="@color/type2TxtColor"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/question_choice_bg"
+                android:fontFamily="@font/poppins_black"
+                android:paddingStart="10dp"
+                android:id="@+id/question_type2_fragment_txtChoice4"
+                android:paddingTop="5dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="5dp"
+                android:text="D"
+                android:textColor="@color/type2TxtColor"
+                android:textSize="19sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+</layout>

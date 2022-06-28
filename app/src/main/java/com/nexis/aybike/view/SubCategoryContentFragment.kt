@@ -34,7 +34,7 @@ class SubCategoryContentFragment(val subCategory: SubCategory, val userId: Strin
 
         subCategoryContentViewModel = ViewModelProvider(this).get(SubCategoryContentViewModel::class.java)
         observeLiveData()
-        subCategoryContentViewModel.getTests(subCategory.subCategoryId)
+        subCategoryContentViewModel.getTests(subCategory.subCategoryId, subCategory.subCategoryName)
     }
 
     override fun onCreateView(

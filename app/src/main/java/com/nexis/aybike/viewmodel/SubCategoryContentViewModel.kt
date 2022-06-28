@@ -12,7 +12,7 @@ class SubCategoryContentViewModel(application: Application) : BaseViewModel(appl
     val testList = MutableLiveData<ArrayList<Test>>()
     val errorMessage = MutableLiveData<String>()
 
-    fun getTests(subCategoryId: String){
+    fun getTests(subCategoryId: String, subCategoryName: String){
         FirebaseUtils.mQuery = FirebaseUtils.mFireStore
             .collection("SubCategories").document(subCategoryId).collection("Tests")
         FirebaseUtils.mQuery.get()
@@ -25,11 +25,19 @@ class SubCategoryContentViewModel(application: Application) : BaseViewModel(appl
                             FirebaseUtils.mTest = it.documents.get(snapshot).toObject(Test::class.java)!!
                             tests.add(FirebaseUtils.mTest)
 
-                            if (snapshot == it.documents.size - 1)
+                            if (snapshot == it.documents.size - 1){
+                                if (subCategoryName.lowercase().equals("tümü"))
+                                    tests.shuffle()
+
                                 testList.value = tests
+                            }
                         }else{
-                            if (snapshot == it.documents.size - 1)
+                            if (snapshot == it.documents.size - 1){
+                                if (subCategoryName.lowercase().equals("tümü"))
+                                    tests.shuffle()
+
                                 testList.value = tests
+                            }
                         }
                     }
                 }

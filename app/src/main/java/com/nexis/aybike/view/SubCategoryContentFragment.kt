@@ -69,7 +69,7 @@ class SubCategoryContentFragment(val subCategory: SubCategory, val userId: Strin
                         categoryId: String,
                         testData: Test
                     ) {
-                        navDirections = MainFragmentDirections.actionMainFragmentToQuestionsFragment(subCategoryId, categoryId, testData, userId)
+                        navDirections = MainFragmentDirections.actionMainFragmentToQuestionsFragment(subCategoryId, categoryId, testData, userId, null)
                         Navigation.findNavController(v).navigate(navDirections)
                     }
                 })

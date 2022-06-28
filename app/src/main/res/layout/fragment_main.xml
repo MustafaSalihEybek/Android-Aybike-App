@@ -13,17 +13,16 @@
         android:id="@+id/aybike_action_toolBar"/>
 
     <TextView
-        android:layout_width="match_parent"
-        android:textSize="17sp"
-        android:padding="15dp"
         android:id="@+id/main_fragment_txtQuestionOfDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/aybike_action_toolBar"
-        android:fontFamily="@font/poppins_bold"
-        android:textColor="@color/questionOfDayTxtColor"
-        android:gravity="center"
-        android:text="Günün Sorusu Kalan Süre: 12:24:53"
         android:background="@color/questionOfDayBgColor"
-        android:layout_height="wrap_content"/>
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:padding="15dp"
+        android:textColor="@color/questionOfDayTxtColor"
+        android:textSize="17sp" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/main_fragment_tabLayout"
@@ -36,7 +35,7 @@
         app:tabTextAppearance="@style/tab_text"
         app:tabTextColor="@color/fragmentTabLayoutTxtColor" />
 
-    <androidx.viewpager.widget.ViewPager
+    <com.nexis.aybike.util.SwipeDisabledViewPager
         android:layout_width="match_parent"
         android:scrollbars="none"
         android:id="@+id/main_fragment_viewPager"

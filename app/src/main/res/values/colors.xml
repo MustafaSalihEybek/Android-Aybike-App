@@ -14,6 +14,7 @@
 
     <color name="questionOfDayBgColor">#F7F7F7</color>
     <color name="questionOfDayTxtColor">#FFA4A4</color>
+    <color name="questionOfDayTxtColor2">#4CAF50</color>
     
     <color name="fragmentTabLayoutBgColor">#F7F7F7</color>
     <color name="fragmentTabLayoutShadowColor">#E5E5E5</color>

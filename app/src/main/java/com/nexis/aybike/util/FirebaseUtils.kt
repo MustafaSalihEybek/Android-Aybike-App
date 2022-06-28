@@ -2,12 +2,10 @@ package com.nexis.aybike.util
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.nexis.aybike.model.Question
-import com.nexis.aybike.model.SubCategory
-import com.nexis.aybike.model.Test
-import com.nexis.aybike.model.User
+import com.nexis.aybike.model.*
 
 object FirebaseUtils {
     val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -18,6 +16,8 @@ object FirebaseUtils {
     lateinit var mQuery: Query
     lateinit var mQuestion: Question
     lateinit var mUser: User
+    lateinit var mDocRef: DocumentReference
+    lateinit var mTestHistory: TestHistory
 
     fun getSubCategories(categoryName: String, notifyMessage: NotifyMessage, getSubCategoriesOnComplete: (categoryList: ArrayList<SubCategory>?) -> Unit){
         var subCategories: ArrayList<SubCategory>?

@@ -1,5 +1,6 @@
 package com.nexis.aybike.util
 
+import com.nexis.aybike.model.SubCategory
 import kotlinx.android.synthetic.main.aybike_action_bar.*
 
 object AppUtils {
@@ -38,5 +39,20 @@ object AppUtils {
         dList.add(iList)
 
         return dList
+    }
+
+    fun getEditedSubCategoryList(subCategoryList: ArrayList<SubCategory>) : ArrayList<SubCategory> {
+        val categoryList: ArrayList<SubCategory> = subCategoryList
+        var firstSubCategory: SubCategory
+
+        for (c in subCategoryList.indices){
+            if (subCategoryList.get(c).categoryNumber == 1){
+                firstSubCategory = categoryList.get(0)
+                categoryList[0] = categoryList[c]
+                categoryList[c] = firstSubCategory
+            }
+        }
+
+        return categoryList
     }
 }

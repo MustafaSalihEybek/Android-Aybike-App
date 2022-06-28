@@ -23,5 +23,6 @@
 
     <style name="sub_tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
         <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">15sp</item>
     </style>
 </resources>

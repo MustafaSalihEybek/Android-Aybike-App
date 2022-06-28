@@ -14,6 +14,8 @@ import com.nexis.aybike.R
 import com.nexis.aybike.adapter.QuestionsViewPagerAdapter
 import com.nexis.aybike.model.Question
 import com.nexis.aybike.model.Test
+import com.nexis.aybike.model.TestHistory
+import com.nexis.aybike.util.FirebaseUtils
 import com.nexis.aybike.util.Singleton
 import com.nexis.aybike.util.show
 import com.nexis.aybike.viewmodel.QuestionsViewModel
@@ -29,8 +31,9 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private lateinit var questionList: ArrayList<Question>
     private var userId: String? = null
     private lateinit var testData: Test
-    private lateinit var subCategoryId: String
-    private lateinit var categoryId: String
+    private var subCategoryId: String? = null
+    private var categoryId: String? = null
+    private var testDate: String? = null
 
     private fun init(){
         arguments?.let {
@@ -38,12 +41,17 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
             testData = QuestionsFragmentArgs.fromBundle(it).testData
             subCategoryId = QuestionsFragmentArgs.fromBundle(it).subCategoryId
             categoryId = QuestionsFragmentArgs.fromBundle(it).categoryId
+            testDate = QuestionsFragmentArgs.fromBundle(it).testDate
 
             questionsViewPagerAdapter = QuestionsViewPagerAdapter(childFragmentManager)
 
             questionsViewModel = ViewModelProvider(this).get(QuestionsViewModel::class.java)
             observeLiveData()
-            questionsViewModel.getQuestions(subCategoryId, testData.testId)
+
+            if (subCategoryId != null)
+                questionsViewModel.getQuestions(subCategoryId!!, testData.testId)
+            else
+                questionsViewModel.getQuestionsFromOfDay(testData.testId)
 
             aybike_action_bar_imgHome.setOnClickListener(this)
             aybike_action_bar_imgProfile.setOnClickListener(this)
@@ -91,19 +99,30 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                         ) {}
 
                         override fun onPageSelected(position: Int) {
-                            if ((position + 1) == questionList.size){
-                                Singleton.showCalculatePointDialog(v, userId, testData, subCategoryId, categoryId)
-
-                                if (userId.isNullOrEmpty())
-                                    Singleton.showSignUpDialog(v)
-                            }
+                            if ((position + 1) == questionList.size)
+                                testEndCalculations()
                         }
 
                         override fun onPageScrollStateChanged(state: Int) {}
                     })
+
+                    if (questionList.size == 1)
+                        testEndCalculations()
                 }
             }
         })
+    }
+
+    private fun testEndCalculations(){
+        Singleton.showCalculatePointDialog(v, userId, testData, subCategoryId, categoryId, testDate)
+
+        if (!testDate.isNullOrEmpty() && !userId.isNullOrEmpty()) {
+            FirebaseUtils.mTestHistory = TestHistory(testData.testId)
+            questionsViewModel.saveTestHistoryData(FirebaseUtils.mTestHistory, testDate!!.replace("/", "-"), userId!!)
+        }
+
+        if (userId.isNullOrEmpty())
+            Singleton.showSignUpDialog(v)
     }
 
     private fun shuffleTheQuestions(questions: ArrayList<Question>) : ArrayList<Question> {

@@ -3,6 +3,7 @@ package com.nexis.aybike.viewmodel
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.nexis.aybike.model.SubCategory
+import com.nexis.aybike.util.AppUtils
 import com.nexis.aybike.util.FirebaseUtils
 import com.nexis.aybike.util.NotifyMessage
 import com.nexis.aybike.viewmodel.base.BaseViewModel
@@ -21,7 +22,9 @@ class EntertainmentViewModel(application: Application) : BaseViewModel(applicati
                 errorMessage.value = message
             }
         }, getSubCategoriesOnComplete = {categoryList: ArrayList<SubCategory>? ->
-            subCategoryList.value = categoryList
+            categoryList?.let {
+                subCategoryList.value = AppUtils.getEditedSubCategoryList(it)
+            }
         })
     }
 }

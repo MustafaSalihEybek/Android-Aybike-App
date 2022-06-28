@@ -11,6 +11,7 @@
         android:id="@+id/entertainment_fragment_tabLayout"
         android:layout_height="wrap_content"
         android:background="@color/fragmentTabLayoutBgColor"
+        app:tabMode="scrollable"
         app:tabIndicatorColor="@color/fragmentTabLayoutShadowColor"
         app:tabSelectedTextColor="@color/fragmentTabLayoutSelectedTxtColor"
         app:tabTextColor="@color/fragmentTabLayoutTxtColor"

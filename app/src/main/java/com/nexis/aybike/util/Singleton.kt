@@ -19,8 +19,8 @@ class Singleton {
             }
         }
 
-        fun showCalculatePointDialog(v: View, userId: String?, testData: Test, subCategoryId: String, categoryId: String){
-            calculatePointDialog = CalculatePointDialog(v, userId, testData, subCategoryId, categoryId)
+        fun showCalculatePointDialog(v: View, userId: String?, testData: Test, subCategoryId: String?, categoryId: String?, testDate: String?){
+            calculatePointDialog = CalculatePointDialog(v, userId, testData, subCategoryId, categoryId, testDate)
             calculatePointDialog!!.setCancelable(false)
             calculatePointDialog!!.show()
         }

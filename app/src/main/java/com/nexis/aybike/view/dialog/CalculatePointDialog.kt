@@ -14,7 +14,7 @@ import com.nexis.aybike.view.MainFragmentDirections
 import com.nexis.aybike.view.question.QuestionsFragmentDirections
 import kotlinx.android.synthetic.main.calculate_point_dialog.*
 
-class CalculatePointDialog(val v: View, val userId: String?, val testData: Test, val subCategoryId: String, val categoryId: String) : Dialog(v.context), View.OnClickListener {
+class CalculatePointDialog(val v: View, val userId: String?, val testData: Test, val subCategoryId: String?, val categoryId: String?, val testDate: String?) : Dialog(v.context), View.OnClickListener {
     private lateinit var navDirections: NavDirections
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +41,7 @@ class CalculatePointDialog(val v: View, val userId: String?, val testData: Test,
     private fun restartTest(){
         closeThisDialog()
 
-        navDirections = QuestionsFragmentDirections.actionQuestionsFragmentSelf(subCategoryId, categoryId, testData, userId)
+        navDirections = QuestionsFragmentDirections.actionQuestionsFragmentSelf(subCategoryId, categoryId, testData, userId, testDate)
         Navigation.findNavController(v).navigate(navDirections)
     }
 

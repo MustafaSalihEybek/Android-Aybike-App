@@ -55,4 +55,18 @@ object AppUtils {
 
         return categoryList
     }
+
+    fun getEditedNumbers(numbers: Int) : String {
+        if (numbers >= 1000){
+            val firstDigits = (numbers / 1000)
+            val lastDigits = (numbers % 1000)
+
+            if (lastDigits >= 100)
+                return "$firstDigits.${(lastDigits / 100)}b"
+            else
+                return "${firstDigits}b"
+        }
+
+        return "$numbers"
+    }
 }

@@ -38,3 +38,9 @@ fun placeHolderProgress(context: Context) : CircularProgressDrawable {
 fun downloadImage(view: ImageView, url: String?){
     view.downloadImageUrl(url)
 }
+
+fun getTestLikedAmount(view: TextView, testId: String?){
+    testId?.let {
+
+    }
+}

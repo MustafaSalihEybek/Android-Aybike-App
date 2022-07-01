@@ -7,4 +7,14 @@
         <item>Kadın</item>
         <item>Belirtmek İstemiyorum</item>
     </string-array>
+    <string-array name="FilterList">
+        <item>-- Seçiniz --</item>
+        <item>En Yeni</item>
+        <item>En Eski</item>
+        <item>En Popüler</item>
+    </string-array>
+    <string name="ShareMessage1">Hey merhaba, aybike uygulamasındaki çözdüğüm testten</string>
+    <string name="ShareMessage2">şöhret kazandım sen de ne kadar kazanacağını denemek ister misin? hemen linkten uygulamayı indir:</string>
+    <string name="AppUrl">https://play.google.com/store/apps</string>
+    <string name="ShareTitle">Paylaş</string>
 </resources>

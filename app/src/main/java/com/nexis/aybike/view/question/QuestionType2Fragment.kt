@@ -12,10 +12,11 @@ import com.nexis.aybike.R
 import com.nexis.aybike.databinding.FragmentQuestionType2Binding
 import com.nexis.aybike.model.Question
 import com.nexis.aybike.util.AppUtils
+import com.nexis.aybike.util.Singleton
 import com.nexis.aybike.util.downloadImageUrl
 import kotlinx.android.synthetic.main.fragment_question_type2.*
 
-class QuestionType2Fragment(val questionData: Question, val qIn: Int) : Fragment() {
+class QuestionType2Fragment(val questionData: Question, val qIn: Int, val qSize: Int) : Fragment(), View.OnClickListener {
     private lateinit var v: View
     private lateinit var questionType2Binding: FragmentQuestionType2Binding
 
@@ -29,6 +30,11 @@ class QuestionType2Fragment(val questionData: Question, val qIn: Int) : Fragment
 
     private fun init(){
         question_type2_fragment_txtQuestionContent.text = "$qIn-)${questionData.questionContent}"
+
+        question_type2_fragment_imgAnswer1.setOnClickListener(this)
+        question_type2_fragment_imgAnswer2.setOnClickListener(this)
+        question_type2_fragment_imgAnswer3.setOnClickListener(this)
+        question_type2_fragment_imgAnswer4.setOnClickListener(this)
 
         answerImgList = arrayOf(
             question_type2_fragment_imgAnswer1,
@@ -71,6 +77,17 @@ class QuestionType2Fragment(val questionData: Question, val qIn: Int) : Fragment
         super.onViewCreated(view, savedInstanceState)
         v = view
         init()
+    }
+
+    override fun onClick(p0: View?) {
+        p0?.let {
+            when (it.id){
+                R.id.question_type2_fragment_imgAnswer1 -> Singleton.setNextQuestionPage(qSize)
+                R.id.question_type2_fragment_imgAnswer2 -> Singleton.setNextQuestionPage(qSize)
+                R.id.question_type2_fragment_imgAnswer3 -> Singleton.setNextQuestionPage(qSize)
+                R.id.question_type2_fragment_imgAnswer4 -> Singleton.setNextQuestionPage(qSize)
+            }
+        }
     }
 
     private fun setAnswersFromTextsAndImages(answerImgList: Array<ImageView>, answerTextList: Array<TextView>, answerChoiceTextList: Array<TextView>, answerList: ArrayList<String>, imageList: ArrayList<String>, answerChoices: Array<String>){

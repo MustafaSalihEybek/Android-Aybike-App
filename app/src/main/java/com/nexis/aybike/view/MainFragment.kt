@@ -17,6 +17,7 @@ import com.google.firebase.Timestamp
 import com.nexis.aybike.R
 import com.nexis.aybike.adapter.CategoriesViewPagerAdapter
 import com.nexis.aybike.model.Test
+import com.nexis.aybike.util.Singleton
 import com.nexis.aybike.util.show
 import com.nexis.aybike.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.aybike_action_bar.*
@@ -54,11 +55,11 @@ class MainFragment : Fragment(), View.OnClickListener {
             showActionBarItems()
             aybike_action_bar_imgProfile.setOnClickListener(this)
 
+            Singleton.isCurrentMainPage = true
+
             mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
             observeLiveData()
-
-            if (userId != null)
-                mainViewModel.getQuestionsOfDayList()
+            mainViewModel.getQuestionsOfDayList()
         }
     }
 
@@ -101,24 +102,32 @@ class MainFragment : Fragment(), View.OnClickListener {
                 randomTest = questionsOfDayList.get(randomIn)
 
                 fullDateStr = getFullDateWithString()
-                mainViewModel.checkDayOfQuestion(userId!!, fullDateStr)
+
+                if (userId != null)
+                    mainViewModel.checkDayOfQuestion(userId!!, fullDateStr)
+                else
+                    setDayOfQuestionTxt(false)
             }
         })
 
         mainViewModel.checkedDayOfQuestionState.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             it?.let {
                 checkedDayOfQuestionState = it
-                main_fragment_txtQuestionOfDay.setOnClickListener(this)
-
-                if (it){
-                    main_fragment_txtQuestionOfDay.setTextColor(ContextCompat.getColor(v.context, R.color.questionOfDayTxtColor2))
-                    main_fragment_txtQuestionOfDay.text = "Günün sorusu çözüldü"
-                } else {
-                    main_fragment_txtQuestionOfDay.setTextColor(ContextCompat.getColor(v.context, R.color.questionOfDayTxtColor))
-                    startTime()
-                }
+                setDayOfQuestionTxt(it)
             }
         })
+    }
+
+    private fun setDayOfQuestionTxt(checkState: Boolean){
+        main_fragment_txtQuestionOfDay.setOnClickListener(this)
+
+        if (checkState){
+            main_fragment_txtQuestionOfDay.setTextColor(ContextCompat.getColor(v.context, R.color.questionOfDayTxtColor2))
+            main_fragment_txtQuestionOfDay.text = "Günün sorusu çözüldü"
+        } else {
+            main_fragment_txtQuestionOfDay.setTextColor(ContextCompat.getColor(v.context, R.color.questionOfDayTxtColor))
+            startTime()
+        }
     }
 
     private fun startTime(){

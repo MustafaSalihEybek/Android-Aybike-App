@@ -18,6 +18,9 @@ object FirebaseUtils {
     lateinit var mUser: User
     lateinit var mDocRef: DocumentReference
     lateinit var mTestHistory: TestHistory
+    lateinit var mTestFavoriteHistory: TestFavoriteHistory
+    lateinit var mTestLikedHistory: TestLikedHistory
+    lateinit var mLikedTestUser: LikedTestUser
 
     fun getSubCategories(categoryName: String, notifyMessage: NotifyMessage, getSubCategoriesOnComplete: (categoryList: ArrayList<SubCategory>?) -> Unit){
         var subCategories: ArrayList<SubCategory>?
@@ -92,5 +95,160 @@ object FirebaseUtils {
                 else
                     notifyMessage.onError(it.exception?.message)
             }
+    }
+
+    fun checkFavoriteTest(userId: String, testId: String, notifyMessage: NotifyMessage, checkFavoriteTestOnComplete: (checkState: Boolean) -> Unit){
+        mDocRef = mFireStore.collection("Users").document(userId)
+            .collection("Tests Favorite Histories").document(testId)
+        mDocRef.addSnapshotListener { value, error ->
+            if (error != null){
+                notifyMessage.onError(error.localizedMessage)
+                checkFavoriteTestOnComplete(false)
+                return@addSnapshotListener
+            }
+
+            if (value != null)
+                checkFavoriteTestOnComplete(value.exists())
+            else
+                checkFavoriteTestOnComplete(false)
+        }
+    }
+
+    fun addFavoriteTest(testFavoriteHistory: TestFavoriteHistory, userId: String, notifyMessage: NotifyMessage){
+        mFireStore.collection("Users").document(userId)
+            .collection("Tests Favorite Histories").document(testFavoriteHistory.testId)
+            .set(testFavoriteHistory)
+            .addOnCompleteListener {
+                if (it.isSuccessful)
+                    notifyMessage.onSuccess("Test favorilere başarıyla eklendi")
+                else
+                    notifyMessage.onError(it.exception?.message)
+            }
+    }
+
+    fun removeFavoriteTest(userId: String, testId: String, notifyMessage: NotifyMessage){
+        mFireStore.collection("Users").document(userId)
+            .collection("Tests Favorite Histories").document(testId)
+            .delete()
+            .addOnCompleteListener {
+                if (it.isSuccessful)
+                    notifyMessage.onSuccess("Test favorilerden başarıyla kaldırıldı")
+                else
+                    notifyMessage.onError(it.exception?.message)
+            }
+    }
+
+    fun checkLikedTest(userId: String, testId: String, notifyMessage: NotifyMessage, checkLikedTestOnComplete: (checkState: Boolean) -> Unit){
+        mDocRef = mFireStore.collection("Users").document(userId)
+            .collection("Tests Like Histories").document(testId)
+        mDocRef.addSnapshotListener { value, error ->
+            if (error != null){
+                notifyMessage.onError(error.localizedMessage)
+                checkLikedTestOnComplete(false)
+                return@addSnapshotListener
+            }
+
+            if (value != null)
+                checkLikedTestOnComplete(value.exists())
+            else
+                checkLikedTestOnComplete(false)
+        }
+    }
+
+    fun addLikeTest(testLikedHistory: TestLikedHistory, testLikedTestUser: LikedTestUser, userId: String, notifyMessage: NotifyMessage){
+        mFireStore.collection("Users").document(userId)
+            .collection("Tests Like Histories").document(testLikedHistory.testId)
+            .set(testLikedHistory)
+            .addOnCompleteListener {
+                if (it.isSuccessful){
+                    mFireStore.collection("SubCategories").document(testLikedHistory.testSubCategoryId)
+                        .collection("Tests").document(testLikedHistory.testId).collection("Users Like").document(userId)
+                        .set(testLikedTestUser)
+                        .addOnCompleteListener {
+                            if (it.isSuccessful)
+                                notifyMessage.onSuccess("Test başarıyla beğenildi")
+                            else
+                                notifyMessage.onError(it.exception?.message)
+                        }
+                }
+                else
+                    notifyMessage.onError(it.exception?.message)
+            }
+    }
+
+    fun removeLikeTest(userId: String, testId: String, subCategoryId: String, notifyMessage: NotifyMessage){
+        mFireStore.collection("SubCategories").document(subCategoryId).collection("Tests")
+            .document(testId).collection("Users Like").document(userId)
+            .delete()
+            .addOnCompleteListener {
+                if (it.isSuccessful){
+                    mFireStore.collection("Users").document(userId)
+                        .collection("Tests Like Histories").document(testId)
+                        .delete()
+                        .addOnCompleteListener {
+                            if (it.isSuccessful)
+                                notifyMessage.onSuccess("Test beğenilerden başarıyla kaldırıldı")
+                            else
+                                notifyMessage.onError(it.exception?.message)
+                        }
+                } else
+                    notifyMessage.onError(it.exception?.message)
+            }
+    }
+
+    fun getLikedAmount(testData: Test, subCategoryId: String, notifyMessage: NotifyMessage, getLikedAmountOnComplete: (likedAmount: Int) -> Unit){
+        mQuery = mFireStore.collection("SubCategories").document(subCategoryId)
+            .collection("Tests").document(testData.testId).collection("Users Like")
+        mQuery.addSnapshotListener { value, error ->
+            if (error != null){
+                notifyMessage.onError(error.localizedMessage)
+                getLikedAmountOnComplete(0)
+                return@addSnapshotListener
+            }
+
+            if (value != null)
+                getLikedAmountOnComplete(value.documents.size)
+            else
+                getLikedAmountOnComplete(0)
+        }
+    }
+
+    fun getViewAmount(testData: Test, subCategoryId: String, notifyMessage: NotifyMessage, getViewAmountOnComplete: (viewAmount: Int) -> Unit){
+        mDocRef = mFireStore.collection("SubCategories").document(subCategoryId)
+            .collection("Tests").document(testData.testId)
+        mDocRef.addSnapshotListener { value, error ->
+            if (error != null){
+                notifyMessage.onError(error.localizedMessage)
+                getViewAmountOnComplete(0)
+                return@addSnapshotListener
+            }
+
+            if (value != null){
+                mTest = value.toObject(Test::class.java)!!
+                getViewAmountOnComplete(mTest.testViewAmount)
+            } else
+                getViewAmountOnComplete(0)
+        }
+    }
+
+    fun getViewAmountOneTime(testData: Test, subCategoryId: String, notifyMessage: NotifyMessage, getViewAmountOneTimeOnComplete: (viewAmount: Int) -> Unit){
+        mDocRef = mFireStore.collection("SubCategories").document(subCategoryId)
+            .collection("Tests").document(testData.testId)
+        mDocRef.get()
+            .addOnSuccessListener {
+                if (it.exists()){
+                    mTest = it.toObject(Test::class.java)!!
+                    getViewAmountOneTimeOnComplete(mTest.testViewAmount)
+                } else
+                    getViewAmountOneTimeOnComplete(0)
+            }.addOnFailureListener {
+                notifyMessage.onError(it.localizedMessage)
+                getViewAmountOneTimeOnComplete(0)
+            }
+    }
+
+    fun updateTestData(testId: String, subCategoryId: String, data: Map<String, Any>){
+        mFireStore.collection("SubCategories").document(subCategoryId)
+            .collection("Tests").document(testId).update(data)
     }
 }

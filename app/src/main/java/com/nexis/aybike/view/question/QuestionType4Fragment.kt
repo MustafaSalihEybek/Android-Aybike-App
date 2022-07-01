@@ -9,9 +9,10 @@ import androidx.databinding.DataBindingUtil
 import com.nexis.aybike.R
 import com.nexis.aybike.databinding.FragmentQuestionType4Binding
 import com.nexis.aybike.model.Question
+import com.nexis.aybike.util.Singleton
 import kotlinx.android.synthetic.main.fragment_question_type4.*
 
-class QuestionType4Fragment(val questionData: Question, val qIn: Int) : Fragment(), View.OnClickListener {
+class QuestionType4Fragment(val questionData: Question, val qIn: Int, val qSize: Int) : Fragment(), View.OnClickListener {
     private lateinit var v: View
     private lateinit var questionType4Binding: FragmentQuestionType4Binding
 
@@ -39,11 +40,9 @@ class QuestionType4Fragment(val questionData: Question, val qIn: Int) : Fragment
     override fun onClick(p0: View?) {
         p0?.let {
             when (it.id){
-                R.id.question_type4_fragment_btnAnswerTrue -> println("True")
-                R.id.question_type4_fragment_btnAnswerFalse -> println("False")
+                R.id.question_type4_fragment_btnAnswerTrue -> Singleton.setNextQuestionPage(qSize)
+                R.id.question_type4_fragment_btnAnswerFalse -> Singleton.setNextQuestionPage(qSize)
             }
         }
     }
-
-
 }

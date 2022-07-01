@@ -24,6 +24,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_weight="0.9"
+            android:id="@+id/test_item_imgTest"
             android:scaleType="centerCrop"
             android:downloadImg="@{test.testImageUrl}"
             android:layout_height="match_parent"/>
@@ -61,8 +62,8 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:text="2.1b"
                         android:textSize="15sp"
+                        android:id="@+id/test_item_txtViewAmount"
                         android:fontFamily="@font/poppins_black"
                         android:textColor="@color/testCardItemSubTitleColor"
                         android:layout_height="wrap_content"/>
@@ -78,7 +79,17 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_marginTop="3dp"
+                        android:visibility="gone"
+                        android:id="@+id/test_item_imgFilledStar"
                         android:src="@drawable/filled_star_icon"
+                        android:layout_height="24dp"/>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_marginTop="3dp"
+                        android:visibility="gone"
+                        android:id="@+id/test_item_imgHollowStar"
+                        android:src="@drawable/hollow_star_icon"
                         android:layout_height="24dp"/>
 
                 </LinearLayout>
@@ -92,7 +103,7 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:text="2.1b"
+                        android:id="@+id/test_item_txtLikedAmount"
                         android:textSize="15sp"
                         android:fontFamily="@font/poppins_black"
                         android:textColor="@color/testCardItemSubTitleColor"
@@ -109,7 +120,17 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_marginTop="3dp"
+                        android:visibility="gone"
+                        android:id="@+id/test_item_imgFilledHeart"
                         android:src="@drawable/filled_heart_icon"
+                        android:layout_height="24dp"/>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:visibility="gone"
+                        android:layout_marginTop="3dp"
+                        android:id="@+id/test_item_imgHollowHeart"
+                        android:src="@drawable/hollow_heart_icon"
                         android:layout_height="24dp"/>
 
                 </LinearLayout>

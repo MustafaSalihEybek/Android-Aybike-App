@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
@@ -18,7 +20,7 @@ import com.nexis.aybike.util.show
 import com.nexis.aybike.viewmodel.SubCategoryContentViewModel
 import kotlinx.android.synthetic.main.fragment_sub_category_content.*
 
-class SubCategoryContentFragment(val subCategory: SubCategory, val userId: String?) : Fragment() {
+class SubCategoryContentFragment(val subCategory: SubCategory, val userId: String?) : Fragment(), View.OnClickListener {
     private lateinit var v: View
     private lateinit var subCategoryContentViewModel: SubCategoryContentViewModel
     private lateinit var navDirections: NavDirections
@@ -26,15 +28,38 @@ class SubCategoryContentFragment(val subCategory: SubCategory, val userId: Strin
     private lateinit var testList: ArrayList<Test>
     private lateinit var testsAdapter: TestsAdapter
 
+    private lateinit var filterArrayAdapter: ArrayAdapter<CharSequence>
+    private lateinit var txtSelectedFilter: String
+
     private fun init(){
         sub_category_content_fragment_recyclerView.setHasFixedSize(true)
         sub_category_content_fragment_recyclerView.layoutManager = LinearLayoutManager(v.context, LinearLayoutManager.VERTICAL, false)
-        testsAdapter = TestsAdapter(arrayListOf(), subCategory.subCategoryId, subCategory.categoryId)
+        testsAdapter = TestsAdapter(arrayListOf(), subCategory.subCategoryId, subCategory.categoryId, userId, v)
         sub_category_content_fragment_recyclerView.adapter = testsAdapter
+
+        filterArrayAdapter = ArrayAdapter.createFromResource(v.context, R.array.FilterList, R.layout.spinner_item)
+        filterArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        sub_category_content_fragment_spinnerFilter.adapter = filterArrayAdapter
+
+        sub_category_content_fragment_spinnerFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                p0?.let {
+                    txtSelectedFilter = it.getItemAtPosition(p2).toString()
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                p0?.let {
+                    txtSelectedFilter = it.getItemAtPosition(0).toString()
+                }
+            }
+        }
+
+        sub_category_content_fragment_btnApply.setOnClickListener(this)
 
         subCategoryContentViewModel = ViewModelProvider(this).get(SubCategoryContentViewModel::class.java)
         observeLiveData()
-        subCategoryContentViewModel.getTests(subCategory.subCategoryId, subCategory.subCategoryName)
+        subCategoryContentViewModel.getTests(subCategory.subCategoryId, subCategory.subCategoryName, false, "")
     }
 
     override fun onCreateView(
@@ -49,6 +74,21 @@ class SubCategoryContentFragment(val subCategory: SubCategory, val userId: Strin
         super.onViewCreated(view, savedInstanceState)
         v = view
         init()
+    }
+
+    override fun onClick(p0: View?) {
+        p0?.let {
+            when (it.id){
+                R.id.sub_category_content_fragment_btnApply -> setFilter()
+            }
+        }
+    }
+
+    private fun setFilter(){
+        if (!txtSelectedFilter.equals("-- Seçiniz --") && !txtSelectedFilter.isEmpty())
+            subCategoryContentViewModel.getTests(subCategory.subCategoryId, subCategory.subCategoryName, true, txtSelectedFilter)
+        else
+            txtSelectedFilter.show(v, "Lütfen listeden bir filtre seçiniz")
     }
 
     private fun observeLiveData(){

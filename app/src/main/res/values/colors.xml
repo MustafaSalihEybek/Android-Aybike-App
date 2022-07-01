@@ -58,4 +58,12 @@
     <color name="dialogBtnBgColor">#50AFCC</color>
     <color name="dialogBtnShadowColor">#71D2E2</color>
     <color name="dialogBtnTxtColor">#FFFFFF</color>
+
+    <color name="spinnerBorderColor">#24688E</color>
+    <color name="spinnerBgColor">#FFFFFF</color>
+    <color name="spinnerTxtColor">#50AFCC</color>
+
+    <color name="btnBgColor">#50AFCC</color>
+    <color name="btnShadowColor">#71D2E2</color>
+    <color name="btnTxtColor">#FFFFFF</color>
 </resources>

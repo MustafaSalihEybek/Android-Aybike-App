@@ -11,9 +11,10 @@ import com.nexis.aybike.R
 import com.nexis.aybike.databinding.FragmentQuestionType3Binding
 import com.nexis.aybike.model.Question
 import com.nexis.aybike.util.AppUtils
+import com.nexis.aybike.util.Singleton
 import kotlinx.android.synthetic.main.fragment_question_type3.*
 
-class QuestionType3Fragment(val questionData: Question, val qIn: Int) : Fragment() {
+class QuestionType3Fragment(val questionData: Question, val qIn: Int, val qSize: Int) : Fragment(), View.OnClickListener {
     private lateinit var v: View
     private lateinit var questionType3Binding: FragmentQuestionType3Binding
 
@@ -32,6 +33,11 @@ class QuestionType3Fragment(val questionData: Question, val qIn: Int) : Fragment
 
         answerList = ArrayList(AppUtils.shuffleTheAnswers(questionData.questionAnswers))
         setAnswersFromText(answerTextList, answerList)
+
+        question_type3_fragment_linearAnswer1.setOnClickListener(this)
+        question_type3_fragment_linearAnswer2.setOnClickListener(this)
+        question_type3_fragment_linearAnswer3.setOnClickListener(this)
+        question_type3_fragment_linearAnswer4.setOnClickListener(this)
     }
 
     override fun onCreateView(
@@ -46,6 +52,17 @@ class QuestionType3Fragment(val questionData: Question, val qIn: Int) : Fragment
         super.onViewCreated(view, savedInstanceState)
         v = view
         init()
+    }
+
+    override fun onClick(p0: View?) {
+        p0?.let {
+            when (it.id){
+                R.id.question_type3_fragment_linearAnswer1 -> Singleton.setNextQuestionPage(qSize)
+                R.id.question_type3_fragment_linearAnswer2 -> Singleton.setNextQuestionPage(qSize)
+                R.id.question_type3_fragment_linearAnswer3 -> Singleton.setNextQuestionPage(qSize)
+                R.id.question_type3_fragment_linearAnswer4 -> Singleton.setNextQuestionPage(qSize)
+            }
+        }
     }
 
     private fun setAnswersFromText(answerTextList: Array<TextView>, answerList: ArrayList<String>){

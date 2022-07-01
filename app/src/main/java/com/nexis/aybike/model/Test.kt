@@ -7,5 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class Test(
     val testId: String = "",
     val testImageUrl: String = "",
-    val testTitle: String = ""
+    val testTitle: String = "",
+    val testLikeAmount: Int = 0,
+    val testViewAmount: Int = 0
 ) : Parcelable

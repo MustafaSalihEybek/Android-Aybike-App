@@ -1,7 +1,7 @@
 package com.nexis.aybike.view.dialog
 
 import android.app.Dialog
-import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
@@ -10,7 +10,6 @@ import androidx.navigation.Navigation
 import com.nexis.aybike.R
 import com.nexis.aybike.model.Test
 import com.nexis.aybike.util.Singleton
-import com.nexis.aybike.view.MainFragmentDirections
 import com.nexis.aybike.view.question.QuestionsFragmentDirections
 import kotlinx.android.synthetic.main.calculate_point_dialog.*
 
@@ -22,7 +21,7 @@ class CalculatePointDialog(val v: View, val userId: String?, val testData: Test,
         setContentView(R.layout.calculate_point_dialog)
 
         window?.let {
-            it.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
+            it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
 
         calculate_point_dialog_btnRestart.setOnClickListener(this)

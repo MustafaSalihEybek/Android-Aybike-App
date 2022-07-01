@@ -3,8 +3,10 @@ package com.nexis.aybike.viewmodel
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.nexis.aybike.model.Question
+import com.nexis.aybike.model.Test
 import com.nexis.aybike.model.TestHistory
 import com.nexis.aybike.util.FirebaseUtils
+import com.nexis.aybike.util.NotifyMessage
 import com.nexis.aybike.viewmodel.base.BaseViewModel
 
 class QuestionsViewModel(application: Application) : BaseViewModel(application) {
@@ -12,6 +14,7 @@ class QuestionsViewModel(application: Application) : BaseViewModel(application) 
 
     val questionsList = MutableLiveData<ArrayList<Question>>()
     val errorMessage = MutableLiveData<String>()
+    val testViewAmount = MutableLiveData<Int>()
 
     fun getQuestions(subCategoryId: String, testId: String){
         FirebaseUtils.mQuery = FirebaseUtils.mFireStore.collection("SubCategories")
@@ -68,5 +71,17 @@ class QuestionsViewModel(application: Application) : BaseViewModel(application) 
     fun saveTestHistoryData(testHistory: TestHistory, date: String, userId: String){
         FirebaseUtils.mFireStore.collection("Users").document(userId)
             .collection("Tests").document(date).set(testHistory)
+    }
+
+    fun getTestViewAmount(subCategoryId: String, testData: Test){
+        FirebaseUtils.getViewAmountOneTime(testData, subCategoryId, object : NotifyMessage{
+            override fun onSuccess(message: String) {}
+
+            override fun onError(message: String?) {
+                errorMessage.value = message
+            }
+        }, getViewAmountOneTimeOnComplete = {viewAmount ->
+            testViewAmount.value = viewAmount
+        })
     }
 }

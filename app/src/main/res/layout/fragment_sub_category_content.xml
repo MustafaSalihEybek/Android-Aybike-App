@@ -15,28 +15,14 @@
         android:layout_marginStart="5dp"
         android:background="@drawable/spinner_bg"
         android:id="@+id/sub_category_content_fragment_spinnerFilter"
-        android:layout_height="35dp"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:textSize="15sp"
-        android:layout_marginTop="5dp"
-        android:id="@+id/sub_category_content_fragment_btnApply"
-        android:layout_marginEnd="5dp"
-        android:textAllCaps="false"
-        android:layout_alignParentEnd="true"
-        android:background="@drawable/btn_bg"
-        android:fontFamily="@font/poppins_bold"
-        android:textColor="@color/btnTxtColor"
-        android:text="Uygula"
-        android:layout_height="45dp"
-        app:backgroundTint="@null"/>
+        android:layout_height="27dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:scrollbars="none"
+        android:layoutAnimation="@anim/layout_animation"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/sub_category_content_fragment_btnApply"
+        android:layout_below="@+id/sub_category_content_fragment_spinnerFilter"
         android:id="@+id/sub_category_content_fragment_recyclerView"
         android:layout_height="match_parent"/>
 

@@ -18,8 +18,8 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:text="Kazandığınız şöhret puanlarının kaydedilmesi ve çözdüğünüz testi paylaşabilmek için üye olmanız gerekiyor"
         android:textSize="18sp"
+        android:id="@+id/sign_up_dialog_txtMessage"
         android:layout_marginTop="15dp"
         android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"

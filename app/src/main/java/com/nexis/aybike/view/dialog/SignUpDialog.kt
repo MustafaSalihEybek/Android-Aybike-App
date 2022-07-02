@@ -12,7 +12,7 @@ import com.nexis.aybike.util.Singleton
 import com.nexis.aybike.view.question.QuestionsFragmentDirections
 import kotlinx.android.synthetic.main.sign_up_dialog.*
 
-class SignUpDialog(val v: View) : Dialog(v.context), View.OnClickListener {
+class SignUpDialog(val v: View, val message: String) : Dialog(v.context), View.OnClickListener {
     private lateinit var navDirections: NavDirections
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +23,7 @@ class SignUpDialog(val v: View) : Dialog(v.context), View.OnClickListener {
             it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
 
+        sign_up_dialog_txtMessage.text = message
         sign_up_dialog_btnClose.setOnClickListener(this)
         sign_up_dialog_btnSignIn.setOnClickListener(this)
     }

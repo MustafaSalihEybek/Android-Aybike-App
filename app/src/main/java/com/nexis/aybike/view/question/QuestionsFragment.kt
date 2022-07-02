@@ -62,6 +62,9 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private lateinit var shareIntent: Intent
     private var bmpUri: Uri? = null
 
+    private val signUpMessage: String = "Kazandığınız şöhret puanlarının kaydedilmesi ve çözdüğünüz testi paylaşabilmek için üye olmanız gerekiyor"
+    private val shareMessage: String = "Testi arkadaşlarınla paylaşabilmek için üye olmanız gerekiyor"
+
     private fun init(){
         arguments?.let {
             userId = QuestionsFragmentArgs.fromBundle(it).userId
@@ -175,7 +178,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         }
 
         if (userId.isNullOrEmpty())
-            Singleton.showSignUpDialog(v)
+            Singleton.showSignUpDialog(v, signUpMessage, false)
     }
 
     private fun shuffleTheQuestions(questions: ArrayList<Question>) : ArrayList<Question> {
@@ -234,16 +237,19 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
 
     private fun shareTest(){
-        imageBitmap = BitmapFactory.decodeResource(resources, R.drawable.app_title_img)
-        shareMsg = "${resources.getString(R.string.ShareMessage1)} $totalPoint ${resources.getString(R.string.ShareMessage2)} ${resources.getString(R.string.AppUrl)}"
+        if (userId != null){
+            imageBitmap = BitmapFactory.decodeResource(resources, R.drawable.app_title_img)
+            shareMsg = "${resources.getString(R.string.ShareMessage1)} $totalPoint ${resources.getString(R.string.ShareMessage2)} ${resources.getString(R.string.AppUrl)}"
 
-        shareIntent = Intent(Intent.ACTION_SEND)
-        shareIntent.type = "image/jpeg"
-        bmpUri = saveImage(imageBitmap, v.context)
-        shareIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri)
-        shareIntent.putExtra(Intent.EXTRA_TEXT, shareMsg)
-        startActivity(Intent.createChooser(shareIntent, resources.getString(R.string.ShareTitle)))
+            shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "image/jpeg"
+            bmpUri = saveImage(imageBitmap, v.context)
+            shareIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri)
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMsg)
+            startActivity(Intent.createChooser(shareIntent, resources.getString(R.string.ShareTitle)))
+        } else
+            Singleton.showSignUpDialog(v, shareMessage, true)
     }
 
     private fun saveImage(image: Bitmap, context: Context) : Uri? {

@@ -9,16 +9,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nexis.aybike.R
 import com.nexis.aybike.databinding.TestItemBinding
-import com.nexis.aybike.model.LikedTestUser
-import com.nexis.aybike.model.Test
-import com.nexis.aybike.model.TestFavoriteHistory
-import com.nexis.aybike.model.TestLikedHistory
+import com.nexis.aybike.model.*
 import com.nexis.aybike.util.AppUtils
 import com.nexis.aybike.util.FirebaseUtils
 import com.nexis.aybike.util.NotifyMessage
 import com.nexis.aybike.util.show
 
-class TestsAdapter(var testList: ArrayList<Test>, val subCategoryId: String, val categoryId: String, val userId: String?, val vV: View) : RecyclerView.Adapter<TestsAdapter.TestsHolder>() {
+class TestsAdapter(var testList: ArrayList<Test>, val subCategory: SubCategory, val userId: String?, val vV: View) : RecyclerView.Adapter<TestsAdapter.TestsHolder>() {
     private lateinit var v: TestItemBinding
     private lateinit var testOnItemClickListener: TestOnItemClickListener
     private var aPos: Int = 0
@@ -49,9 +46,11 @@ class TestsAdapter(var testList: ArrayList<Test>, val subCategoryId: String, val
 
                 if (aPos != RecyclerView.NO_POSITION){
                     FirebaseUtils.mTestFavoriteHistory = TestFavoriteHistory(testList.get(aPos).testId, userId)
+
                     FirebaseUtils.addFavoriteTest(FirebaseUtils.mTestFavoriteHistory, userId, object : NotifyMessage{
                         override fun onSuccess(message: String) {
                             message.show(vV, message)
+                            setFavoriteIcons(true, holder)
                         }
 
                         override fun onError(message: String?) {
@@ -70,6 +69,7 @@ class TestsAdapter(var testList: ArrayList<Test>, val subCategoryId: String, val
                     FirebaseUtils.removeFavoriteTest(userId, testList.get(aPos).testId, object : NotifyMessage{
                         override fun onSuccess(message: String) {
                             message.show(vV, message)
+                            setFavoriteIcons(false, holder)
                         }
 
                         override fun onError(message: String?) {
@@ -97,11 +97,12 @@ class TestsAdapter(var testList: ArrayList<Test>, val subCategoryId: String, val
                 aPos = holder.adapterPosition
 
                 if (aPos != RecyclerView.NO_POSITION){
-                    FirebaseUtils.mTestLikedHistory = TestLikedHistory(testList.get(position).testId, subCategoryId)
+                    FirebaseUtils.mTestLikedHistory = TestLikedHistory(testList.get(aPos).testId, subCategory.subCategoryId)
                     FirebaseUtils.mLikedTestUser = LikedTestUser(userId)
                     FirebaseUtils.addLikeTest(FirebaseUtils.mTestLikedHistory, FirebaseUtils.mLikedTestUser, userId, object : NotifyMessage{
                         override fun onSuccess(message: String) {
                             message.show(vV, message)
+                            setLikedIcons(true, holder)
                         }
 
                         override fun onError(message: String?) {
@@ -117,9 +118,10 @@ class TestsAdapter(var testList: ArrayList<Test>, val subCategoryId: String, val
                 aPos = holder.adapterPosition
 
                 if (aPos != RecyclerView.NO_POSITION){
-                    FirebaseUtils.removeLikeTest(userId, testList.get(aPos).testId, subCategoryId, object : NotifyMessage{
+                    FirebaseUtils.removeLikeTest(userId, testList.get(aPos).testId, subCategory.subCategoryId, object : NotifyMessage{
                         override fun onSuccess(message: String) {
                             message.show(vV, message)
+                            setLikedIcons(false, holder)
                         }
 
                         override fun onError(message: String?) {
@@ -131,7 +133,7 @@ class TestsAdapter(var testList: ArrayList<Test>, val subCategoryId: String, val
                 }
             }
 
-            FirebaseUtils.getLikedAmount(testList.get(position), subCategoryId, object : NotifyMessage{
+            FirebaseUtils.getLikedAmount(testList.get(position), subCategory.subCategoryId, object : NotifyMessage{
                 override fun onSuccess(message: String) {}
 
                 override fun onError(message: String?) {
@@ -141,10 +143,10 @@ class TestsAdapter(var testList: ArrayList<Test>, val subCategoryId: String, val
                 }
             }, getLikedAmountOnComplete = {likedAmount ->
                 holder.txtLikedAmount.text = AppUtils.getEditedNumbers(likedAmount)
-                FirebaseUtils.updateTestData(testList.get(position).testId, subCategoryId, mapOf("testLikeAmount" to likedAmount))
+                FirebaseUtils.updateTestData(testList.get(position).testId, subCategory.subCategoryId, mapOf("testLikeAmount" to likedAmount))
             })
 
-            FirebaseUtils.getViewAmount(testList.get(position), subCategoryId, object : NotifyMessage{
+            FirebaseUtils.getViewAmount(testList.get(position), subCategory.subCategoryId, object : NotifyMessage{
                 override fun onSuccess(message: String) {}
 
                 override fun onError(message: String?) {
@@ -154,7 +156,7 @@ class TestsAdapter(var testList: ArrayList<Test>, val subCategoryId: String, val
                 }
             }, getViewAmountOnComplete = {viewAmount ->
                 holder.txtViewAmount.text = AppUtils.getEditedNumbers(viewAmount)
-                FirebaseUtils.updateTestData(testList.get(position).testId, subCategoryId, mapOf("testViewAmount" to viewAmount))
+                FirebaseUtils.updateTestData(testList.get(position).testId, subCategory.subCategoryId, mapOf("testViewAmount" to viewAmount))
             })
         } else {
             holder.txtViewAmount.text = "0"
@@ -165,7 +167,7 @@ class TestsAdapter(var testList: ArrayList<Test>, val subCategoryId: String, val
             aPos = holder.adapterPosition
 
             if (aPos != RecyclerView.NO_POSITION)
-                testOnItemClickListener.onItemClick(subCategoryId, categoryId, testList.get(aPos))
+                testOnItemClickListener.onItemClick(subCategory.subCategoryId, subCategory.categoryId, testList.get(aPos))
         }
     }
 

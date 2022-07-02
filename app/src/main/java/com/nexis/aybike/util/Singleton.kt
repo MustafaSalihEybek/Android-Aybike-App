@@ -42,9 +42,9 @@ class Singleton {
             }
         }
 
-        fun showSignUpDialog(v: View){
-            signUpDialog = SignUpDialog(v)
-            signUpDialog!!.setCancelable(false)
+        fun showSignUpDialog(v: View, message: String, isCancel: Boolean){
+            signUpDialog = SignUpDialog(v, message)
+            signUpDialog!!.setCancelable(isCancel)
             signUpDialog!!.show()
         }
 

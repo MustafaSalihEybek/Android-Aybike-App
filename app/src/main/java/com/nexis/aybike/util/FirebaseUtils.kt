@@ -100,18 +100,13 @@ object FirebaseUtils {
     fun checkFavoriteTest(userId: String, testId: String, notifyMessage: NotifyMessage, checkFavoriteTestOnComplete: (checkState: Boolean) -> Unit){
         mDocRef = mFireStore.collection("Users").document(userId)
             .collection("Tests Favorite Histories").document(testId)
-        mDocRef.addSnapshotListener { value, error ->
-            if (error != null){
-                notifyMessage.onError(error.localizedMessage)
+        mDocRef.get()
+            .addOnSuccessListener {
+                checkFavoriteTestOnComplete(it.exists())
+            }.addOnFailureListener {
+                notifyMessage.onError(it.localizedMessage)
                 checkFavoriteTestOnComplete(false)
-                return@addSnapshotListener
             }
-
-            if (value != null)
-                checkFavoriteTestOnComplete(value.exists())
-            else
-                checkFavoriteTestOnComplete(false)
-        }
     }
 
     fun addFavoriteTest(testFavoriteHistory: TestFavoriteHistory, userId: String, notifyMessage: NotifyMessage){
@@ -141,18 +136,13 @@ object FirebaseUtils {
     fun checkLikedTest(userId: String, testId: String, notifyMessage: NotifyMessage, checkLikedTestOnComplete: (checkState: Boolean) -> Unit){
         mDocRef = mFireStore.collection("Users").document(userId)
             .collection("Tests Like Histories").document(testId)
-        mDocRef.addSnapshotListener { value, error ->
-            if (error != null){
-                notifyMessage.onError(error.localizedMessage)
+        mDocRef.get()
+            .addOnSuccessListener {
+                checkLikedTestOnComplete(it.exists())
+            }.addOnFailureListener {
+                notifyMessage.onError(it.localizedMessage)
                 checkLikedTestOnComplete(false)
-                return@addSnapshotListener
             }
-
-            if (value != null)
-                checkLikedTestOnComplete(value.exists())
-            else
-                checkLikedTestOnComplete(false)
-        }
     }
 
     fun addLikeTest(testLikedHistory: TestLikedHistory, testLikedTestUser: LikedTestUser, userId: String, notifyMessage: NotifyMessage){

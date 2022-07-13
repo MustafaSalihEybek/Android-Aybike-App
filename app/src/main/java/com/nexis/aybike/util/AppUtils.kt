@@ -1,7 +1,12 @@
 package com.nexis.aybike.util
 
+import com.google.firebase.Timestamp
 import com.nexis.aybike.model.SubCategory
 import kotlinx.android.synthetic.main.aybike_action_bar.*
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 object AppUtils {
     fun shuffleTheAnswers(answers: ArrayList<String>) : ArrayList<String> {
@@ -68,5 +73,43 @@ object AppUtils {
         }
 
         return "$numbers"
+    }
+
+    fun getFullDateWithString() : String {
+        val timeNowFromFirebase = Date(Timestamp.now().seconds * 1000)
+        val fullDate = SimpleDateFormat("dd/M/yyyy")
+        val fullDateStr = fullDate.format(timeNowFromFirebase)
+
+        return fullDateStr
+    }
+
+    fun getAddedDayTime(dayNumber: Int) : String {
+        val simpleDate: SimpleDateFormat = SimpleDateFormat("dd/M/yyyy")
+        val calendar: Calendar = Calendar.getInstance()
+
+        try {
+            calendar.time = simpleDate.parse(AppUtils.getFullDateWithString())
+        } catch (e: ParseException){
+            e.printStackTrace()
+        }
+
+        calendar.add(Calendar.DATE, dayNumber)
+        val simpleDate2: SimpleDateFormat = SimpleDateFormat("dd/M/yyyy")
+
+        return simpleDate2.format(calendar.time)
+    }
+
+    fun increaseCorrectAndWrongAmount(isWrong: Boolean){
+        if (!isWrong){
+            Singleton.correctAndWrongAmountTuple = Pair(
+                Singleton.correctAndWrongAmountTuple.first + 1,
+                Singleton.correctAndWrongAmountTuple.second
+            )
+        }else{
+            Singleton.correctAndWrongAmountTuple = Pair(
+                Singleton.correctAndWrongAmountTuple.first,
+                Singleton.correctAndWrongAmountTuple.second + 1
+            )
+        }
     }
 }

@@ -8,6 +8,7 @@ import android.view.View
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import com.nexis.aybike.R
+import com.nexis.aybike.util.Singleton
 import kotlinx.android.synthetic.main.exit_the_test_dialog.*
 
 class ExitTheTestDialog(val v: View, val navDirections: NavDirections) : Dialog(v.context), View.OnClickListener {
@@ -39,6 +40,7 @@ class ExitTheTestDialog(val v: View, val navDirections: NavDirections) : Dialog(
 
     private fun goToPage(){
         Navigation.findNavController(v).navigate(navDirections)
+        Singleton.isCurrentMainPage = true
         closeThisDialog()
     }
 }

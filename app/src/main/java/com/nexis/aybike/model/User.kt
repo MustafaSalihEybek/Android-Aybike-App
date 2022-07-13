@@ -7,5 +7,6 @@ data class User(
     val userGender: String = "",
     val userBirthday: String = "",
     val userCountry: String = "",
-    val userCity: String = ""
+    val userCity: String = "",
+    val userPoint: Float = 0F
 )

@@ -33,6 +33,7 @@
 
         <ImageView
             android:layout_width="24dp"
+            android:id="@+id/question_type3_fragment_radioAnswer1"
             android:src="@drawable/question_circle_radio_unselected_bg"
             android:layout_height="24dp"/>
 
@@ -61,6 +62,7 @@
 
         <ImageView
             android:layout_width="24dp"
+            android:id="@+id/question_type3_fragment_radioAnswer2"
             android:src="@drawable/question_circle_radio_unselected_bg"
             android:layout_height="24dp"/>
 
@@ -89,6 +91,7 @@
 
         <ImageView
             android:layout_width="24dp"
+            android:id="@+id/question_type3_fragment_radioAnswer3"
             android:src="@drawable/question_circle_radio_unselected_bg"
             android:layout_height="24dp"/>
 
@@ -117,6 +120,7 @@
 
         <ImageView
             android:layout_width="24dp"
+            android:id="@+id/question_type3_fragment_radioAnswer4"
             android:src="@drawable/question_circle_radio_unselected_bg"
             android:layout_height="24dp"/>
 

@@ -7,20 +7,44 @@
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/btn_bg.xml" value="0.17222222222222222" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/dialog_bg.xml" value="0.17222222222222222" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/dialog_btn_bg.xml" value="0.17222222222222222" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/dialog_btn_low_opacity_bg.xml" value="0.1685185185185185" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/edit_bg.xml" value="0.17222222222222222" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_answer_button_bg.xml" value="0.17222222222222222" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_answer_button_correct_bg.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_answer_button_selected_bg.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_answer_button_wrong_bg.xml" value="0.1685185185185185" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_choice_bg.xml" value="0.17222222222222222" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_choice_correct_bg.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_choice_selected_bg.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_choice_wrong_bg.xml" value="0.1685185185185185" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_circle_radio_bg.xml" value="0.17222222222222222" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_circle_radio_correct_bg.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_circle_radio_selected_bg.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_circle_radio_unselected_bg.xml" value="0.2703125" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_circle_radio_wrong_bg.xml" value="0.1685185185185185" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_type1_bg.xml" value="0.17222222222222222" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_type1_correct_bg.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_type1_selected_bg.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_type1_wrong_bg.xml" value="0.1685185185185185" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_type2_bg.xml" value="0.17222222222222222" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_type2_correct_bg.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_type2_selected_bg.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_type2_wrong_bg.xml" value="0.1685185185185185" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_type3_bg.xml" value="0.17222222222222222" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_type3_correct_bg.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_type3_selected_bg.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/question_type3_wrong_bg.xml" value="0.1685185185185185" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/sign_btn_bg.xml" value="0.17222222222222222" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/spinner_bg.xml" value="0.17222222222222222" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/vip_package_selected_bg.xml" value="0.1165" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/drawable/vip_package_unselected_bg.xml" value="0.2703125" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout-v21/progress_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/aybike_action_bar.xml" value="0.25025641025641027" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/calculate_point_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/exit_the_app_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/exit_the_test_dialog.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/exit_the_test_with_time_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/fragment_entertainment.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/fragment_general_culture.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/fragment_main.xml" value="0.25416666666666665" />
@@ -34,6 +58,8 @@
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/fragment_sign_in.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/fragment_sign_up.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/fragment_sub_category_content.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/fragment_vips.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/progress_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/sign_up_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/spinner_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Nexis/AndroidStudioProjects/Aybike/app/src/main/res/layout/test_item.xml" value="0.25416666666666665" />

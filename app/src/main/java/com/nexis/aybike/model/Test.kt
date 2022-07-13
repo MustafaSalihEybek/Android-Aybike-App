@@ -9,5 +9,6 @@ data class Test(
     val testImageUrl: String = "",
     val testTitle: String = "",
     val testLikeAmount: Int = 0,
-    val testViewAmount: Int = 0
+    val testViewAmount: Int = 0,
+    val testEndMessages: ArrayList<String> = ArrayList()
 ) : Parcelable

@@ -21,6 +21,9 @@ object FirebaseUtils {
     lateinit var mTestFavoriteHistory: TestFavoriteHistory
     lateinit var mTestLikedHistory: TestLikedHistory
     lateinit var mLikedTestUser: LikedTestUser
+    lateinit var mTestSolution: TestSolution
+    lateinit var mShopSub: ShopSub
+    lateinit var mShopSubHistory: ShopSubHistory
 
     fun getSubCategories(categoryName: String, notifyMessage: NotifyMessage, getSubCategoriesOnComplete: (categoryList: ArrayList<SubCategory>?) -> Unit){
         var subCategories: ArrayList<SubCategory>?
@@ -240,5 +243,77 @@ object FirebaseUtils {
     fun updateTestData(testId: String, subCategoryId: String, data: Map<String, Any>){
         mFireStore.collection("SubCategories").document(subCategoryId)
             .collection("Tests").document(testId).update(data)
+    }
+
+    fun updateUserData(userId: String, data: Map<String, Any>, notifyMessage: NotifyMessage, updateUserDataOnComplete: (updateState: Boolean) -> Unit){
+        mFireStore.collection("Users").document(userId)
+            .update(data)
+            .addOnCompleteListener {
+                if (it.isSuccessful)
+                    updateUserDataOnComplete(true)
+                else {
+                    notifyMessage.onError(it.exception?.message)
+                    updateUserDataOnComplete(false)
+                }
+            }
+    }
+
+    fun getUserDataOneTime(userId: String, notifyMessage: NotifyMessage, getUserDataOneTimeOnComplete: (user: User) -> Unit){
+        mDocRef = mFireStore.collection("Users").document(userId)
+        mDocRef.get()
+            .addOnSuccessListener {
+                if (it.exists()){
+                    mUser = it.toObject(User::class.java)!!
+                    getUserDataOneTimeOnComplete(mUser)
+                }
+            }.addOnFailureListener {
+                notifyMessage.onError(it.message)
+            }
+    }
+
+    fun testIsSolved(subCategoryId: String, testId: String, userId: String, testIsSolvedOnComplete: (solvedState: Boolean, testSolution: TestSolution?) -> Unit){
+        mDocRef = mFireStore.collection("SubCategories").document(subCategoryId)
+            .collection("Tests").document(testId).collection("Tests Solved").document(userId)
+        mDocRef.get()
+            .addOnSuccessListener {
+                if (it.exists()){
+                    mTestSolution = it.toObject(TestSolution::class.java)!!
+                    testIsSolvedOnComplete(true, mTestSolution)
+                } else
+                    testIsSolvedOnComplete(false, null)
+            }.addOnFailureListener {
+                testIsSolvedOnComplete(false, null)
+            }
+    }
+
+    fun getShopSubList(notifyMessage: NotifyMessage, getShopSubListOnComplete: (shopTuple: Pair<ArrayList<ShopSub>, ArrayList<String>>) -> Unit){
+        var shopList: ArrayList<ShopSub>
+        var skuList: ArrayList<String>
+
+        mQuery = mFireStore.collection("ShopItemSubs").orderBy("shopItemNumber", Query.Direction.ASCENDING)
+        mQuery.get()
+            .addOnSuccessListener {
+                if (it.documents.size > 0){
+                    shopList = ArrayList()
+                    skuList = ArrayList()
+
+                    for (snapshot in it.documents.indices){
+                        if (it.documents.get(snapshot).exists()){
+                            mShopSub = it.documents.get(snapshot).toObject(ShopSub::class.java)!!
+
+                            shopList.add(mShopSub)
+                            skuList.add(mShopSub.shopItemSkuId)
+
+                            if (snapshot == it.documents.size - 1)
+                                getShopSubListOnComplete(Pair(shopList, skuList))
+                        } else {
+                            if (snapshot == it.documents.size - 1)
+                                getShopSubListOnComplete(Pair(shopList, skuList))
+                        }
+                    }
+                }
+            }.addOnFailureListener {
+                notifyMessage.onError(it.message)
+            }
     }
 }

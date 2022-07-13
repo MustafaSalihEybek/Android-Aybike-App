@@ -2,8 +2,10 @@ package com.nexis.aybike.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import com.nexis.aybike.model.ShopSub
 import com.nexis.aybike.model.Test
 import com.nexis.aybike.util.FirebaseUtils
+import com.nexis.aybike.util.NotifyMessage
 import com.nexis.aybike.viewmodel.base.BaseViewModel
 import java.util.*
 import kotlin.collections.ArrayList
@@ -11,6 +13,7 @@ import kotlin.collections.ArrayList
 class MainViewModel(application: Application) : BaseViewModel(application) {
     private lateinit var questions: ArrayList<Test>
 
+    val shopTuple = MutableLiveData<Pair<ArrayList<ShopSub>, ArrayList<String>>>()
     val questionsOfDayList = MutableLiveData<ArrayList<Test>>()
     val errorMessage = MutableLiveData<String>()
     val checkedDayOfQuestionState = MutableLiveData<Boolean>()
@@ -59,5 +62,17 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
             else
                 checkedDayOfQuestionState.value = false
         }
+    }
+
+    fun getShopSubs(){
+        FirebaseUtils.getShopSubList(object : NotifyMessage{
+            override fun onSuccess(message: String) {}
+
+            override fun onError(message: String?) {
+                errorMessage.value = message
+            }
+        }, getShopSubListOnComplete = {shopTuple ->
+            this.shopTuple.value = shopTuple
+        })
     }
 }

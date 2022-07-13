@@ -97,11 +97,11 @@ class SubCategoryContentFragment(val subCategory: SubCategory, val userId: Strin
 
                 testsAdapter.setTestOnItemClickListener(object : TestsAdapter.TestOnItemClickListener{
                     override fun onItemClick(
-                        subCategoryId: String,
+                        subCategory: SubCategory,
                         categoryId: String,
                         testData: Test
                     ) {
-                        navDirections = MainFragmentDirections.actionMainFragmentToQuestionsFragment(subCategoryId, categoryId, testData, userId, null)
+                        navDirections = MainFragmentDirections.actionMainFragmentToQuestionsFragment(subCategory, categoryId, testData, userId, null)
                         Navigation.findNavController(v).navigate(navDirections)
                     }
                 })

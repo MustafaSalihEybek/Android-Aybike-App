@@ -6,18 +6,20 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.nexis.aybike.R
 import com.nexis.aybike.databinding.TestItemBinding
 import com.nexis.aybike.model.*
-import com.nexis.aybike.util.AppUtils
-import com.nexis.aybike.util.FirebaseUtils
-import com.nexis.aybike.util.NotifyMessage
-import com.nexis.aybike.util.show
+import com.nexis.aybike.util.*
+import com.nexis.aybike.view.MainFragmentDirections
 
 class TestsAdapter(var testList: ArrayList<Test>, val subCategory: SubCategory, val userId: String?, val vV: View) : RecyclerView.Adapter<TestsAdapter.TestsHolder>() {
     private lateinit var v: TestItemBinding
     private lateinit var testOnItemClickListener: TestOnItemClickListener
+    private lateinit var navDirections: NavDirections
+    private lateinit var txtTimeNow: String
     private var aPos: Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestsHolder {
@@ -28,7 +30,36 @@ class TestsAdapter(var testList: ArrayList<Test>, val subCategory: SubCategory, 
     override fun onBindViewHolder(holder: TestsHolder, position: Int) {
         holder.tH.test = testList.get(position)
 
+        FirebaseUtils.getLikedAmount(testList.get(position), subCategory.subCategoryId, object : NotifyMessage{
+            override fun onSuccess(message: String) {}
+
+            override fun onError(message: String?) {
+                message?.let {
+                    it.show(vV, it)
+                }
+            }
+        }, getLikedAmountOnComplete = {likedAmount ->
+            holder.txtLikedAmount.text = AppUtils.getEditedNumbers(likedAmount)
+            FirebaseUtils.updateTestData(testList.get(position).testId, subCategory.subCategoryId, mapOf("testLikeAmount" to likedAmount))
+        })
+
+        FirebaseUtils.getViewAmount(testList.get(position), subCategory.subCategoryId, object : NotifyMessage{
+            override fun onSuccess(message: String) {}
+
+            override fun onError(message: String?) {
+                message?.let {
+                    it.show(vV, it)
+                }
+            }
+        }, getViewAmountOnComplete = {viewAmount ->
+            holder.txtViewAmount.text = AppUtils.getEditedNumbers(viewAmount)
+            FirebaseUtils.updateTestData(testList.get(position).testId, subCategory.subCategoryId, mapOf("testViewAmount" to viewAmount))
+        })
+
         if (userId != null){
+            if (!Singleton.userVipStatus)
+                isUserSolvedTheTest(subCategory.subCategoryId, testList.get(position).testId, userId, holder)
+
             FirebaseUtils.checkFavoriteTest(userId, testList.get(position).testId, object : NotifyMessage{
                 override fun onSuccess(message: String) {}
 
@@ -132,32 +163,6 @@ class TestsAdapter(var testList: ArrayList<Test>, val subCategory: SubCategory, 
                     })
                 }
             }
-
-            FirebaseUtils.getLikedAmount(testList.get(position), subCategory.subCategoryId, object : NotifyMessage{
-                override fun onSuccess(message: String) {}
-
-                override fun onError(message: String?) {
-                    message?.let {
-                        it.show(vV, it)
-                    }
-                }
-            }, getLikedAmountOnComplete = {likedAmount ->
-                holder.txtLikedAmount.text = AppUtils.getEditedNumbers(likedAmount)
-                FirebaseUtils.updateTestData(testList.get(position).testId, subCategory.subCategoryId, mapOf("testLikeAmount" to likedAmount))
-            })
-
-            FirebaseUtils.getViewAmount(testList.get(position), subCategory.subCategoryId, object : NotifyMessage{
-                override fun onSuccess(message: String) {}
-
-                override fun onError(message: String?) {
-                    message?.let {
-                        it.show(vV, it)
-                    }
-                }
-            }, getViewAmountOnComplete = {viewAmount ->
-                holder.txtViewAmount.text = AppUtils.getEditedNumbers(viewAmount)
-                FirebaseUtils.updateTestData(testList.get(position).testId, subCategory.subCategoryId, mapOf("testViewAmount" to viewAmount))
-            })
         } else {
             holder.txtViewAmount.text = "0"
             holder.txtLikedAmount.text = "0"
@@ -166,8 +171,12 @@ class TestsAdapter(var testList: ArrayList<Test>, val subCategory: SubCategory, 
         holder.imgTest.setOnClickListener {
             aPos = holder.adapterPosition
 
-            if (aPos != RecyclerView.NO_POSITION)
-                testOnItemClickListener.onItemClick(subCategory.subCategoryId, subCategory.categoryId, testList.get(aPos))
+            if (aPos != RecyclerView.NO_POSITION){
+                if (holder.itemView.alpha != 0.5f)
+                    testOnItemClickListener.onItemClick(subCategory, subCategory.categoryId, testList.get(aPos))
+                else
+                    goToVipsPage(userId, vV)
+            }
         }
     }
 
@@ -189,11 +198,33 @@ class TestsAdapter(var testList: ArrayList<Test>, val subCategory: SubCategory, 
     }
 
     interface TestOnItemClickListener{
-        fun onItemClick(subCategoryId: String, categoryId: String, testData: Test)
+        fun onItemClick(subCategory: SubCategory, categoryId: String, testData: Test)
     }
 
     fun setTestOnItemClickListener(testOnItemClickListener: TestOnItemClickListener){
         this.testOnItemClickListener = testOnItemClickListener
+    }
+
+    private fun goToVipsPage(userId: String?, v: View){
+        navDirections = MainFragmentDirections.actionMainFragmentToVipsFragment(userId)
+        Navigation.findNavController(v).navigate(navDirections)
+    }
+
+    private fun isUserSolvedTheTest(subCategoryId: String, testId: String, userId: String, holder: TestsHolder?) {
+        FirebaseUtils.testIsSolved(subCategoryId, testId,
+            userId, testIsSolvedOnComplete = {solvedState, testSolution ->
+                if (solvedState){
+                    testSolution?.let {
+                        txtTimeNow = AppUtils.getFullDateWithString()
+
+                        if (txtTimeNow.equals(it.testDate1) || txtTimeNow.equals(it.testDate2) || txtTimeNow.equals(it.testDate3)){
+                            holder?.let {
+                                it.itemView.alpha = 0.5f
+                            }
+                        }
+                    }
+                }
+            })
     }
 
     private fun setFavoriteIcons(isFavorite: Boolean, holder: TestsHolder){

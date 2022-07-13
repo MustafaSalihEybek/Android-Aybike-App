@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:padding="10dp"
+        android:gravity="center"
+        android:background="@drawable/dialog_bg"
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/dialogTxtColor"
+            tools:ignore="UnusedAttribute" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginStart="5dp"
+            android:id="@+id/progress_dialog_txtMessage"
+            android:textColor="@color/dialogTxtColor"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Lütfen bekleyin..."
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</layout>

@@ -21,14 +21,17 @@
         <action
             android:id="@+id/action_mainFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_vipsFragment"
+            app:destination="@id/vipsFragment" />
     </fragment>
     <fragment
         android:id="@+id/questionsFragment"
         android:name="com.nexis.aybike.view.question.QuestionsFragment"
         android:label="QuestionsFragment" >
         <argument
-            android:name="subCategoryId"
-            app:argType="string"
+            android:name="subCategoryData"
+            app:argType="com.nexis.aybike.model.SubCategory"
             app:nullable="true"/>
         <argument
             android:name="categoryId"
@@ -81,5 +84,17 @@
             android:name="userId"
             app:argType="string"
             app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/vipsFragment"
+        android:name="com.nexis.aybike.view.VipsFragment"
+        android:label="VipsFragment" >
+        <argument
+            android:name="userId"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_vipsFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

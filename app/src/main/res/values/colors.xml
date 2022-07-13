@@ -30,18 +30,62 @@
     <color name="type1TxtColor">#B7B7B7</color>
     <color name="type1BgColor">#FFFFFF</color>
     <color name="type1ShadowColor">#E0E0E0</color>
+    <color name="type1SelectedTxtColor">#A8A8A8</color>
+    <color name="type1SelectedBgColor">#E0E0E0</color>
+    <color name="type1SelectedShadowColor">#969696</color>
+    <color name="type1CorrectTxtColor">#F9F9F9</color>
+    <color name="type1CorrectBgColor">#73E5A1</color>
+    <color name="type1CorrectShadowColor">#3CAA69</color>
+    <color name="type1WrongTxtColor">#F9F9F9</color>
+    <color name="type1WrongBgColor">#E88585</color>
+    <color name="type1WrongShadowColor">#A83D3D</color>
 
     <color name="type2TxtColor">#B7B7B7</color>
     <color name="type2BgColor">#FFFFFF</color>
     <color name="type2ShadowColor">#E0E0E0</color>
+    <color name="type2SelectedTxtColor">#A8A8A8</color>
+    <color name="type2SelectedBgColor">#E0E0E0</color>
+    <color name="type2SelectedShadowColor">#969696</color>
+    <color name="type2CorrectTxtColor">#F9F9F9</color>
+    <color name="type2CorrectBgColor">#73E5A1</color>
+    <color name="type2CorrectShadowColor">#3CAA69</color>
+    <color name="type2WrongTxtColor">#F9F9F9</color>
+    <color name="type2WrongBgColor">#E88585</color>
+    <color name="type2WrongShadowColor">#A83D3D</color>
 
     <color name="type3TxtColor">#B7B7B7</color>
     <color name="type3BgColor">#FFFFFF</color>
     <color name="type3ShadowColor">#E0E0E0</color>
+    <color name="type3RadioBgColor">#FFFFFF</color>
+    <color name="type3RadioBorderColor">#E0E0E0</color>
+    <color name="type3SelectedTxtColor">#A8A8A8</color>
+    <color name="type3SelectedBgColor">#E0E0E0</color>
+    <color name="type3SelectedShadowColor">#969696</color>
+    <color name="type3SelectedRadioBgColor">#FFFFFF</color>
+    <color name="type3SelectedRadioBorderColor">#A8A8A8</color>
+    <color name="type3CorrectTxtColor">#F9F9F9</color>
+    <color name="type3CorrectBgColor">#73E5A1</color>
+    <color name="type3CorrectShadowColor">#3CAA69</color>
+    <color name="type3CorrectRadioBgColor">#FFFFFF</color>
+    <color name="type3CorrectRadioBorderColor">#A8A8A8</color>
+    <color name="type3WrongTxtColor">#F9F9F9</color>
+    <color name="type3WrongBgColor">#E88585</color>
+    <color name="type3WrongShadowColor">#A83D3D</color>
+    <color name="type3WrongRadioBgColor">#FFFFFF</color>
+    <color name="type3WrongRadioBorderColor">#A8A8A8</color>
 
     <color name="type4TxtColor">#000000</color>
     <color name="type4BgColor">#E0E0E0</color>
     <color name="type4ShadowColor">#B7B7B7</color>
+    <color name="type4SelectedTxtColor">#A8A8A8</color>
+    <color name="type4SelectedBgColor">#E0E0E0</color>
+    <color name="type4SelectedShadowColor">#969696</color>
+    <color name="type4CorrectTxtColor">#F9F9F9</color>
+    <color name="type4CorrectBgColor">#73E5A1</color>
+    <color name="type4CorrectShadowColor">#3CAA69</color>
+    <color name="type4WrongTxtColor">#F9F9F9</color>
+    <color name="type4WrongBgColor">#E88585</color>
+    <color name="type4WrongShadowColor">#A83D3D</color>
     
     <color name="signTitleTxtColor">#3A97BF</color>
     <color name="signEditBgColor">#FFFFFF</color>
@@ -66,4 +110,12 @@
     <color name="btnBgColor">#50AFCC</color>
     <color name="btnShadowColor">#71D2E2</color>
     <color name="btnTxtColor">#FFFFFF</color>
+
+    <color name="vipPackageTitleColor">#3A97BF</color>
+    <color name="vipPackageBgColor">#FFFFFF</color>
+    <color name="vipPackageShadowColor">#E0E0E0</color>
+    <color name="vipPackageTxtColor">#B7B7B7</color>
+    <color name="vipPackageSelectedBgColor">#E0E0E0</color>
+    <color name="vipPackageSelectedShadowColor">#969696</color>
+    <color name="vipPackageSelectedTxtColor">#A8A8A8</color>
 </resources>

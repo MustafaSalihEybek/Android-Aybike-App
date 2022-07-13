@@ -14,7 +14,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:text="Sign Up"
+            android:text="Kayıt Ol"
             android:layout_marginTop="25dp"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/poppins_bold"
@@ -24,7 +24,7 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:hint="Username"
+            android:hint="Kullanıcı adı"
             android:background="@drawable/edit_bg"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
@@ -41,7 +41,7 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:hint="Email address"
+            android:hint="Email adresi"
             android:background="@drawable/edit_bg"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
@@ -58,7 +58,7 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:hint="Password"
+            android:hint="Şifre"
             android:background="@drawable/edit_bg"
             android:id="@+id/sign_up_fragment_editUserPassword"
             android:paddingEnd="10dp"
@@ -84,7 +84,7 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:hint="Birthday"
+            android:hint="Doğum günü"
             android:background="@drawable/edit_bg"
             android:id="@+id/sign_up_fragment_editUserBirthday"
             android:paddingEnd="10dp"
@@ -111,7 +111,7 @@
 
             <EditText
                 android:layout_width="0dp"
-                android:hint="Country"
+                android:hint="Ülke"
                 android:layout_weight="1"
                 android:background="@drawable/edit_bg"
                 android:id="@+id/sign_up_fragment_editUserCountry"
@@ -127,7 +127,7 @@
 
             <EditText
                 android:layout_width="0dp"
-                android:hint="City"
+                android:hint="Şehir"
                 android:layout_weight="1"
                 android:background="@drawable/edit_bg"
                 android:id="@+id/sign_up_fragment_editUserCity"
@@ -144,8 +144,8 @@
         </LinearLayout>
 
         <Button
-            android:layout_width="200dp"
-            android:text="Sign Up Now"
+            android:layout_width="225dp"
+            android:text="Hemen Kayıt Ol"
             android:textSize="19sp"
             android:id="@+id/sign_up_fragment_btnSignUp"
             android:layout_marginTop="45dp"
@@ -154,12 +154,12 @@
             android:fontFamily="@font/poppins_bold"
             android:textColor="@color/signBtnTxtColor"
             android:background="@drawable/sign_btn_bg"
-            android:layout_height="65dp"
+            android:layout_height="70dp"
             app:backgroundTint="@null"/>
 
         <Button
-            android:layout_width="200dp"
-            android:text="Sign In Now"
+            android:layout_width="225dp"
+            android:text="Hemen Giriş Yap"
             android:textSize="19sp"
             android:layout_marginTop="15dp"
             android:layout_gravity="center_horizontal"
@@ -169,7 +169,7 @@
             android:fontFamily="@font/poppins_bold"
             android:textColor="@color/signBtnTxtColor"
             android:background="@drawable/sign_btn_bg"
-            android:layout_height="65dp"
+            android:layout_height="70dp"
             app:backgroundTint="@null"/>
 
     </LinearLayout>

@@ -13,10 +13,15 @@ import androidx.core.net.ParseException
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
+import com.android.billingclient.api.*
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
 import com.nexis.aybike.R
 import com.nexis.aybike.adapter.CategoriesViewPagerAdapter
+import com.nexis.aybike.model.ShopSub
 import com.nexis.aybike.model.Test
+import com.nexis.aybike.util.AppUtils
+import com.nexis.aybike.util.FirebaseUtils
 import com.nexis.aybike.util.Singleton
 import com.nexis.aybike.util.show
 import com.nexis.aybike.viewmodel.MainViewModel
@@ -39,6 +44,13 @@ class MainFragment : Fragment(), View.OnClickListener {
     private var userId: String? = null
     private var randomIn: Int = 0
     private var isCurrentPage: Boolean = false
+    private var timeIsStarted: Boolean = false
+
+    private lateinit var mBillingClient: BillingClient
+    private lateinit var subShopList: ArrayList<ShopSub>
+    private lateinit var skuList: ArrayList<String>
+    private var subsMutable: MutableList<Purchase>? = null
+    private var userVipStatus: Boolean = false
 
     private fun init(){
         arguments?.let {
@@ -60,6 +72,34 @@ class MainFragment : Fragment(), View.OnClickListener {
             mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
             observeLiveData()
             mainViewModel.getQuestionsOfDayList()
+
+            if (userId != null){
+                val purchaseUpdateListener =
+                    PurchasesUpdatedListener { billingResult, mutableList ->
+                        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && mutableList != null) {
+                            mainViewModel.getShopSubs()
+                            subsMutable = mutableList
+                        }
+                    }
+
+                mBillingClient = BillingClient.newBuilder(v.context)
+                    .setListener(purchaseUpdateListener)
+                    .enablePendingPurchases()
+                    .build()
+
+                mBillingClient.startConnection(object : BillingClientStateListener {
+                    override fun onBillingSetupFinished(p0: BillingResult) {
+                        if (p0.responseCode == BillingClient.BillingResponseCode.OK) {
+                            subsMutable = mBillingClient.queryPurchases(BillingClient.SkuType.SUBS).purchasesList
+                            mainViewModel.getShopSubs()
+                        }
+                    }
+
+                    override fun onBillingServiceDisconnected() {
+                        "message".show(v, "Ödeme sistemi şu anda geçerli değil")
+                    }
+                })
+            }
         }
     }
 
@@ -74,6 +114,9 @@ class MainFragment : Fragment(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
         isCurrentPage = true
+
+        if (timeIsStarted)
+            startTime()
     }
 
     override fun onPause() {
@@ -94,6 +137,15 @@ class MainFragment : Fragment(), View.OnClickListener {
             }
         })
 
+        mainViewModel.shopTuple.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            it?.let {
+                subShopList = it.first
+                skuList = it.second
+
+                vipStatusControl(subsMutable, skuList, userId!!)
+            }
+        })
+
         mainViewModel.questionsOfDayList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             it?.let {
                 questionsOfDayList = it
@@ -101,7 +153,7 @@ class MainFragment : Fragment(), View.OnClickListener {
                 randomIn = (0 until questionsOfDayList.size).random()
                 randomTest = questionsOfDayList.get(randomIn)
 
-                fullDateStr = getFullDateWithString()
+                fullDateStr = AppUtils.getFullDateWithString()
 
                 if (userId != null)
                     mainViewModel.checkDayOfQuestion(userId!!, fullDateStr)
@@ -118,6 +170,33 @@ class MainFragment : Fragment(), View.OnClickListener {
         })
     }
 
+    private fun vipStatusControl(subsList: MutableList<Purchase>?, skuList: ArrayList<String>, userId: String){
+        if (subsList != null){
+            if (subsList.size > 0){
+                for (purchase in subsList.indices){
+                    if (skuList.contains(subsList.get(purchase).sku)){
+                        userVipStatus = subsList.get(purchase).isAutoRenewing
+
+                        break
+                    }else {
+                        if (purchase == subsList.size - 1)
+                            userVipStatus = false
+                    }
+                }
+            } else
+                userVipStatus = false
+        }else
+            userVipStatus = false
+
+        Singleton.userVipStatus = userVipStatus
+        updateUserVipStatus(userId, mapOf("userVipStatus" to userVipStatus))
+    }
+
+    private fun updateUserVipStatus(userId: String, data: Map<String, Any>){
+        FirebaseUtils.mFireStore.collection("Users").document(userId)
+            .update(data)
+    }
+
     private fun setDayOfQuestionTxt(checkState: Boolean){
         main_fragment_txtQuestionOfDay.setOnClickListener(this)
 
@@ -126,6 +205,7 @@ class MainFragment : Fragment(), View.OnClickListener {
             main_fragment_txtQuestionOfDay.text = "Günün sorusu çözüldü"
         } else {
             main_fragment_txtQuestionOfDay.setTextColor(ContextCompat.getColor(v.context, R.color.questionOfDayTxtColor))
+            timeIsStarted = true
             startTime()
         }
     }
@@ -162,18 +242,14 @@ class MainFragment : Fragment(), View.OnClickListener {
     }
 
     private fun getEditedHours(twoDigits: Int) : Int {
-        if ((twoDigits + 15) > 24)
-            return ((twoDigits + 15) - 24)
+        if (twoDigits > 12){
+            if ((twoDigits + 15) > 24)
+                return ((twoDigits + 15) - 24)
+            else
+                return (twoDigits + 15)
+        }
 
-        return (twoDigits + 15)
-    }
-
-    private fun getFullDateWithString() : String {
-        val timeNowFromFirebase = Date(Timestamp.now().seconds * 1000)
-        val fullDate = SimpleDateFormat("dd/M/yyyy")
-        val fullDateStr = fullDate.format(timeNowFromFirebase)
-
-        return fullDateStr
+        return twoDigits
     }
 
     private fun getDifference(startDate: Date, endDate: Date) : String {

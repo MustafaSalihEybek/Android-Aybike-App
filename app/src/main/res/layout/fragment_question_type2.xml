@@ -31,6 +31,7 @@
             android:layout_width="0dp"
             android:layout_marginEnd="7.5dp"
             android:layout_marginStart="15dp"
+            android:id="@+id/question_type2_fragment_relativeQuestion1"
             android:layout_weight="1"
             android:background="@drawable/question_type2_bg"
             android:layout_height="230dp">
@@ -56,9 +57,9 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/question_type2_fragment_txtChoice1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/question_type2_fragment_txtChoice1"
                 android:background="@drawable/question_choice_bg"
                 android:fontFamily="@font/poppins_black"
                 android:paddingStart="10dp"
@@ -74,6 +75,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_marginEnd="15dp"
+            android:id="@+id/question_type2_fragment_relativeQuestion2"
             android:layout_marginStart="7.5dp"
             android:layout_weight="1"
             android:background="@drawable/question_type2_bg"
@@ -128,6 +130,7 @@
             android:layout_width="0dp"
             android:layout_marginEnd="7.5dp"
             android:layout_marginStart="15dp"
+            android:id="@+id/question_type2_fragment_relativeQuestion3"
             android:layout_weight="1"
             android:background="@drawable/question_type2_bg"
             android:layout_height="230dp">
@@ -172,6 +175,7 @@
             android:layout_width="0dp"
             android:layout_marginEnd="15dp"
             android:layout_marginStart="7.5dp"
+            android:id="@+id/question_type2_fragment_relativeQuestion4"
             android:layout_weight="1"
             android:background="@drawable/question_type2_bg"
             android:layout_height="230dp">

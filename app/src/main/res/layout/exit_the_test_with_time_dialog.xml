@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="15dp"
     android:layout_width="340dp"
+    android:padding="15dp"
     android:background="@drawable/dialog_bg"
     android:layout_height="wrap_content">
 
     <TextView
         android:layout_width="wrap_content"
-        android:text="Tebrikler!"
+        android:text="Uyarı!"
         android:textSize="27sp"
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/poppins_bold"
@@ -18,10 +18,9 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:text="73 Şöhret Kazandınız"
         android:textSize="18sp"
         android:gravity="center_horizontal"
-        android:id="@+id/calculate_point_dialog_txtTotalPoint"
+        android:id="@+id/exit_the_test_with_time_dialog_txtMessage"
         android:layout_marginTop="15dp"
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/poppins_bold"
@@ -32,7 +31,6 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:weightSum="2"
-        android:id="@+id/calculate_point_dialog_linearButtons"
         android:layout_marginTop="25dp"
         android:layout_height="wrap_content">
 
@@ -40,27 +38,27 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:textSize="17sp"
-            android:id="@+id/calculate_point_dialog_btnRestart"
+            android:id="@+id/exit_the_test_with_time_dialog_btnYes"
             android:layout_marginEnd="15dp"
             android:textAllCaps="false"
             android:background="@drawable/dialog_btn_bg"
             android:fontFamily="@font/poppins_bold"
             android:textColor="@color/dialogBtnTxtColor"
-            android:text="Testi Tekrarla"
+            android:text="Evet"
             android:layout_height="match_parent"
             app:backgroundTint="@null"/>
 
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:id="@+id/calculate_point_dialog_btnBackHome"
+            android:id="@+id/exit_the_test_with_time_dialog_btnNo"
             android:textSize="17sp"
             android:layout_marginStart="15dp"
             android:textAllCaps="false"
             android:background="@drawable/dialog_btn_bg"
             android:fontFamily="@font/poppins_bold"
             android:textColor="@color/dialogBtnTxtColor"
-            android:text="Anasayfaya Dön"
+            android:text="Hayır"
             android:layout_height="match_parent"
             app:backgroundTint="@null"/>
 

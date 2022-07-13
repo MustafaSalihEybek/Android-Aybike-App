@@ -19,8 +19,10 @@ class MainActivity : AppCompatActivity() {
         if (Singleton.isCurrentMainPage)
             Singleton.showExitTheAppDialog(this)
         else {
-            navDirections = QuestionsFragmentDirections.actionQuestionsFragmentToMainFragment(Singleton.userId)
-            Singleton.showExitTheTestDialog(Singleton.v, navDirections)
+            if (Singleton.testCategoryName.equals("EntertainmentCategory")){
+                navDirections = QuestionsFragmentDirections.actionQuestionsFragmentToMainFragment(Singleton.userId)
+                Singleton.showExitTheTestDialog(Singleton.v, navDirections)
+            }
         }
     }
 }

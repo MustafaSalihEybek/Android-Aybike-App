@@ -1,5 +1,8 @@
 package com.nexis.aybike.view
 
+import android.animation.Animator
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -16,6 +19,7 @@ import androidx.navigation.Navigation
 import com.android.billingclient.api.*
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FieldValue
 import com.nexis.aybike.R
 import com.nexis.aybike.adapter.CategoriesViewPagerAdapter
 import com.nexis.aybike.model.ShopSub
@@ -49,6 +53,8 @@ class MainFragment : Fragment(), View.OnClickListener {
     private lateinit var mBillingClient: BillingClient
     private lateinit var subShopList: ArrayList<ShopSub>
     private lateinit var skuList: ArrayList<String>
+    private var isEndAnimStart: Boolean = false
+    private var isOneHour: Boolean = false
     private var subsMutable: MutableList<Purchase>? = null
     private var userVipStatus: Boolean = false
 
@@ -101,6 +107,62 @@ class MainFragment : Fragment(), View.OnClickListener {
                 })
             }
         }
+    }
+
+    private fun startQuestionOfDayAnim(isStart: Boolean){
+        var xPos: Float = 0f
+        var xScale: Float = 0f
+        var yScale: Float = 0f
+
+        if (Singleton.isCurrentMainPage){
+            if (isStart)
+                xPos = -200f
+            else
+                xPos = 200f
+        }
+
+        if (isOneHour){
+            if (isStart){
+                yScale = 1f
+                xScale = 1f
+            }
+            else{
+                yScale = 1.25f
+                xScale = 1.25f
+            }
+        }
+
+        val objectAnimX: ObjectAnimator = ObjectAnimator.ofFloat(main_fragment_txtQuestionOfDay, "x", xPos)
+        objectAnimX.duration = 5000
+
+        val animatorSet: AnimatorSet = AnimatorSet()
+        animatorSet.playTogether(objectAnimX)
+
+        if (isOneHour){
+            val objectScaleAnimX: ObjectAnimator = ObjectAnimator.ofFloat(main_fragment_txtQuestionOfDay, "scaleX", xScale)
+            objectScaleAnimX.duration = 2500
+
+            val objectScaleAnimY: ObjectAnimator = ObjectAnimator.ofFloat(main_fragment_txtQuestionOfDay, "scaleY", yScale)
+            objectScaleAnimY.duration = 2500
+
+            animatorSet.playTogether(objectScaleAnimX)
+            animatorSet.playTogether(objectScaleAnimY)
+        }
+
+        animatorSet.start()
+        animatorSet.addListener(object : Animator.AnimatorListener{
+            override fun onAnimationStart(p0: Animator?) {}
+
+            override fun onAnimationEnd(p0: Animator?) {
+                if (Singleton.isCurrentMainPage)
+                    startQuestionOfDayAnim(!isStart)
+            }
+
+            override fun onAnimationCancel(p0: Animator?) {}
+
+            override fun onAnimationRepeat(p0: Animator?) {
+            }
+        })
     }
 
     override fun onCreateView(
@@ -199,6 +261,7 @@ class MainFragment : Fragment(), View.OnClickListener {
 
     private fun setDayOfQuestionTxt(checkState: Boolean){
         main_fragment_txtQuestionOfDay.setOnClickListener(this)
+        startQuestionOfDayAnim(false)
 
         if (checkState){
             main_fragment_txtQuestionOfDay.setTextColor(ContextCompat.getColor(v.context, R.color.questionOfDayTxtColor2))
@@ -222,20 +285,26 @@ class MainFragment : Fragment(), View.OnClickListener {
     }
 
     private fun calculateTime(){
-        val timeNowFromFirebase = Date(Timestamp.now().seconds * 1000)
+        val timeNowFromFirebase = Timestamp.now().toDate()
         val fullTime = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
         val fullDate = SimpleDateFormat("dd/M/yyyy")
+        val firebaseHours = SimpleDateFormat("hh:mm:ss")
         var fullTimeStr = fullTime.format(timeNowFromFirebase)
         val fullDateStr = fullDate.format(timeNowFromFirebase)
-        val fullHours = fullTimeStr.split(" ")[1]
-        val twoDigits: String = fullHours.substring(0, 2)
+        val fullHours = firebaseHours.format(timeNowFromFirebase)
+        /*val twoDigits: String = fullHours.substring(0, 2)
         val reDigits: String = fullHours.substring(2, fullHours.length)
-        fullTimeStr = "$fullDateStr ${getEditedHours(twoDigits.toInt())}:$reDigits"
+        fullTimeStr = "$fullDateStr ${getEditedHours(twoDigits.toInt())}:$reDigits"*/
+        fullTimeStr = "$fullDateStr $fullHours"
+        println(fullTimeStr)
 
         try {
             val date1: Date = Date(fullTimeStr)
             val date2: Date = Date("$fullDateStr 24:00:00")
-            main_fragment_txtQuestionOfDay.text = "Günün Sorusuna Kalan Süre: ${getDifference(date1, date2)}"
+            val txtDifference: String = getDifference(date1, date2)
+            main_fragment_txtQuestionOfDay.text = "Günün Sorusuna Kalan Süre: $txtDifference"
+
+            isOneHour = txtDifference.split(":")[0].toInt() <= 1
         } catch (e: ParseException) {
             e.printStackTrace()
         }
@@ -247,9 +316,8 @@ class MainFragment : Fragment(), View.OnClickListener {
                 return ((twoDigits + 15) - 24)
             else
                 return (twoDigits + 15)
-        }
-
-        return twoDigits
+        } else
+            return (twoDigits + 15)
     }
 
     private fun getDifference(startDate: Date, endDate: Date) : String {
@@ -285,7 +353,8 @@ class MainFragment : Fragment(), View.OnClickListener {
         else
             navDirections = MainFragmentDirections.actionMainFragmentToProfileFragment(userId)
 
-            Navigation.findNavController(v).navigate(navDirections)
+        Singleton.isCurrentMainPage = false
+        Navigation.findNavController(v).navigate(navDirections)
     }
 
     private fun showActionBarItems(){

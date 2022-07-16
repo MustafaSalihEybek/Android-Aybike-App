@@ -12,6 +12,7 @@
     <color name="actionBarBgColor">#FFFFFF</color>
     <color name="actionBarShadowColor">#E0E0E0</color>
 
+    <color name="mainBgColor">#F7F7F7</color>
     <color name="questionOfDayBgColor">#F7F7F7</color>
     <color name="questionOfDayTxtColor">#FFA4A4</color>
     <color name="questionOfDayTxtColor2">#4CAF50</color>

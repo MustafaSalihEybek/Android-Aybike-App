@@ -6,20 +6,17 @@ import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.net.ParseException
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import com.android.billingclient.api.*
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
-import com.google.firebase.firestore.FieldValue
 import com.nexis.aybike.R
 import com.nexis.aybike.adapter.CategoriesViewPagerAdapter
 import com.nexis.aybike.model.ShopSub
@@ -33,7 +30,6 @@ import kotlinx.android.synthetic.main.aybike_action_bar.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class MainFragment : Fragment(), View.OnClickListener {
     private lateinit var v: View
@@ -285,22 +281,16 @@ class MainFragment : Fragment(), View.OnClickListener {
     }
 
     private fun calculateTime(){
-        val timeNowFromFirebase = Timestamp.now().toDate()
-        val fullTime = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-        val fullDate = SimpleDateFormat("dd/M/yyyy")
-        val firebaseHours = SimpleDateFormat("hh:mm:ss")
-        var fullTimeStr = fullTime.format(timeNowFromFirebase)
-        val fullDateStr = fullDate.format(timeNowFromFirebase)
-        val fullHours = firebaseHours.format(timeNowFromFirebase)
-        /*val twoDigits: String = fullHours.substring(0, 2)
-        val reDigits: String = fullHours.substring(2, fullHours.length)
-        fullTimeStr = "$fullDateStr ${getEditedHours(twoDigits.toInt())}:$reDigits"*/
-        fullTimeStr = "$fullDateStr $fullHours"
-        println(fullTimeStr)
+        val cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+3"))
+        val currentLocalTime = cal.time
+        val date: SimpleDateFormat = SimpleDateFormat("dd-MM-yyy HH:mm:ss")
+        date.setTimeZone(TimeZone.getTimeZone("GMT+3"))
+        val localTime: String = date.format(currentLocalTime)
+        fullDateStr = localTime.split(" ")[0]
 
         try {
-            val date1: Date = Date(fullTimeStr)
-            val date2: Date = Date("$fullDateStr 24:00:00")
+            val date1: Date = Date(localTime.replace("-", "/"))
+            val date2: Date = Date(("${fullDateStr.replace("-", "/")} 24:00:00"))
             val txtDifference: String = getDifference(date1, date2)
             main_fragment_txtQuestionOfDay.text = "Günün Sorusuna Kalan Süre: $txtDifference"
 

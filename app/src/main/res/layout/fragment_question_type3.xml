@@ -1,141 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:scrollbars="none"
     tools:context=".view.question.QuestionType3Fragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:textSize="21sp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/question_type3_fragment_txtQuestionContent"
-        android:gravity="center_horizontal"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@android:color/black"
-        android:fontFamily="@font/poppins_bold"
-        android:text="1-)Soru text Soru text Soru text\nSoru text Soru text Soru text"
-        android:layout_height="wrap_content"/>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginStart="25dp"
-        android:id="@+id/question_type3_fragment_linearAnswer1"
-        android:padding="15dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/question_type3_bg"
+        android:orientation="vertical"
         android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:id="@+id/question_type3_fragment_radioAnswer1"
-            android:src="@drawable/question_circle_radio_unselected_bg"
-            android:layout_height="24dp"/>
 
         <TextView
             android:layout_width="wrap_content"
-            android:text="Cevap"
-            android:id="@+id/question_type3_fragment_txtAnswer1"
-            android:textSize="17sp"
-            android:fontFamily="@font/poppins_black"
-            android:textColor="@color/type3TxtColor"
-            android:layout_marginStart="10dp"
+            android:textSize="21sp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/question_type3_fragment_txtQuestionContent"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@android:color/black"
+            android:fontFamily="@font/poppins_bold"
+            android:text="1-)Soru text Soru text Soru text\nSoru text Soru text Soru text"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:scrollbars="none"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="15dp"
+            android:id="@+id/question_type3_fragment_recyclerView"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginStart="25dp"
-        android:id="@+id/question_type3_fragment_linearAnswer2"
-        android:padding="15dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/question_type3_bg"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:id="@+id/question_type3_fragment_radioAnswer2"
-            android:src="@drawable/question_circle_radio_unselected_bg"
-            android:layout_height="24dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="Cevap"
-            android:textSize="17sp"
-            android:id="@+id/question_type3_fragment_txtAnswer2"
-            android:fontFamily="@font/poppins_black"
-            android:textColor="@color/type3TxtColor"
-            android:layout_marginStart="10dp"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginStart="25dp"
-        android:padding="15dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:id="@+id/question_type3_fragment_linearAnswer3"
-        android:background="@drawable/question_type3_bg"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:id="@+id/question_type3_fragment_radioAnswer3"
-            android:src="@drawable/question_circle_radio_unselected_bg"
-            android:layout_height="24dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="Cevap"
-            android:id="@+id/question_type3_fragment_txtAnswer3"
-            android:textSize="17sp"
-            android:fontFamily="@font/poppins_black"
-            android:textColor="@color/type3TxtColor"
-            android:layout_marginStart="10dp"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginStart="25dp"
-        android:id="@+id/question_type3_fragment_linearAnswer4"
-        android:padding="15dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/question_type3_bg"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:id="@+id/question_type3_fragment_radioAnswer4"
-            android:src="@drawable/question_circle_radio_unselected_bg"
-            android:layout_height="24dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="Cevap"
-            android:textSize="17sp"
-            android:fontFamily="@font/poppins_black"
-            android:id="@+id/question_type3_fragment_txtAnswer4"
-            android:textColor="@color/type3TxtColor"
-            android:layout_marginStart="10dp"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>
 
 </layout>

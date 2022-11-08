@@ -13,20 +13,24 @@
     <color name="actionBarShadowColor">#E0E0E0</color>
 
     <color name="mainBgColor">#F7F7F7</color>
-    <color name="questionOfDayBgColor">#F7F7F7</color>
-    <color name="questionOfDayTxtColor">#FFA4A4</color>
-    <color name="questionOfDayTxtColor2">#4CAF50</color>
+    <color name="questionOfDayBgColor">#DF5353</color>
+    <color name="questionOfDayBgColor2">#B9FBC0</color>
+    <color name="questionOfDayTxtColor">@color/white</color>
+    <color name="questionOfDayTxtColor2">@color/white</color>
     
     <color name="fragmentTabLayoutBgColor">#F7F7F7</color>
     <color name="fragmentTabLayoutShadowColor">#E5E5E5</color>
-    <color name="fragmentTabLayoutSelectedTxtColor">#3A97BF</color>
-    <color name="fragmentTabLayoutTxtColor">#50AFCC</color>
+    <color name="fragmentTabLayoutSelectedTxtColor">#F88500</color>
+    <color name="fragmentTabLayoutTxtColor">#ADE5EB</color>
+
+    <color name="fragmentSubTabLayoutSelectedTxtColor">#424242</color>
+    <color name="fragmentSubTabLayoutTxtColor">#7A7A7A</color>
     
     <color name="testCardItemBgColor">#FFFFFF</color>
     <color name="testCardItemShadowColor">#E0E0E0</color>
-    <color name="testCardItemTitleColor">#24688E</color>
-    <color name="testCardItemSubTitleColor">#3A97BF</color>
-    <color name="testCardItemSubTitle2Color">#50AFCC</color>
+    <color name="testCardItemTitleColor">#424242</color>
+    <color name="testCardItemSubTitleColor">#5E5E5E</color>
+    <color name="testCardItemSubTitle2Color">#636363</color>
 
     <color name="type1TxtColor">#B7B7B7</color>
     <color name="type1BgColor">#FFFFFF</color>
@@ -97,9 +101,12 @@
     <color name="signBtnTxtColor">#FFFFFF</color>
     <color name="signForgotPasswordTxtColor">#3A97BF</color>
 
+    <color name="spinnerFilterTxtColor">#636363</color>
+    <color name="spinnerFilterBorderColor">#424242</color>
+
     <color name="dialogBgColor">#FFFFFF</color>
-    <color name="dialogTitleTxtColor">#3A97BF</color>
-    <color name="dialogTxtColor">#50AFCC</color>
+    <color name="dialogTitleTxtColor">#424242</color>
+    <color name="dialogTxtColor">#636363</color>
     <color name="dialogBtnBgColor">#50AFCC</color>
     <color name="dialogBtnShadowColor">#71D2E2</color>
     <color name="dialogBtnTxtColor">#FFFFFF</color>

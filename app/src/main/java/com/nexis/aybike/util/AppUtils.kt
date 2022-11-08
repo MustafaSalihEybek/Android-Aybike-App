@@ -75,6 +75,16 @@ object AppUtils {
         return "$numbers"
     }
 
+    fun getFullDateWithStringByTimeZone() : String {
+        val cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+3"))
+        val currentLocalTime = cal.time
+        val date: SimpleDateFormat = SimpleDateFormat("dd-MM-yyy HH:mm:ss")
+        date.setTimeZone(TimeZone.getTimeZone("GMT+3"))
+        val localTime: String = date.format(currentLocalTime)
+
+        return localTime.split(" ")[0]
+    }
+
     fun getFullDateWithString() : String {
         val timeNowFromFirebase = Date(Timestamp.now().seconds * 1000)
         val fullDate = SimpleDateFormat("dd/M/yyyy")
@@ -99,17 +109,7 @@ object AppUtils {
         return simpleDate2.format(calendar.time)
     }
 
-    fun increaseCorrectAndWrongAmount(isWrong: Boolean){
-        if (!isWrong){
-            Singleton.correctAndWrongAmountTuple = Pair(
-                Singleton.correctAndWrongAmountTuple.first + 1,
-                Singleton.correctAndWrongAmountTuple.second
-            )
-        }else{
-            Singleton.correctAndWrongAmountTuple = Pair(
-                Singleton.correctAndWrongAmountTuple.first,
-                Singleton.correctAndWrongAmountTuple.second + 1
-            )
-        }
+    fun increaseChoiceAmount(cIn: Int){
+        Singleton.choiceAmountList[cIn]++
     }
 }

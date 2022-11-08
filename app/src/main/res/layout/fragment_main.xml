@@ -6,32 +6,39 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainBgColor"
     tools:context=".view.MainFragment">
 
     <include
         layout="@layout/aybike_action_bar"
         android:id="@+id/aybike_action_toolBar"/>
 
-    <TextView
-        android:id="@+id/main_fragment_txtQuestionOfDay"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/aybike_action_toolBar"
+        android:id="@+id/main_fragment_relativeQuestionOfDay"
         android:background="@color/questionOfDayBgColor"
-        android:fontFamily="@font/poppins_bold"
-        android:gravity="center"
-        android:padding="15dp"
-        android:textColor="@color/questionOfDayTxtColor"
-        android:textSize="17sp" />
+        android:layout_below="@+id/aybike_action_toolBar"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/main_fragment_txtQuestionOfDay"
+            android:layout_width="match_parent"
+            android:padding="15dp"
+            android:layout_height="wrap_content"
+            android:background="@color/questionOfDayBgColor"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:textColor="@color/questionOfDayTxtColor"
+            android:textSize="17sp" />
+
+    </RelativeLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/main_fragment_tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/main_fragment_txtQuestionOfDay"
+        android:layout_below="@+id/main_fragment_relativeQuestionOfDay"
         android:background="@color/fragmentTabLayoutBgColor"
-        app:tabIndicatorColor="@color/fragmentTabLayoutShadowColor"
+        app:tabIndicatorColor="@color/fragmentTabLayoutSelectedTxtColor"
         app:tabSelectedTextColor="@color/fragmentTabLayoutSelectedTxtColor"
         app:tabTextAppearance="@style/tab_text"
         app:tabTextColor="@color/fragmentTabLayoutTxtColor" />

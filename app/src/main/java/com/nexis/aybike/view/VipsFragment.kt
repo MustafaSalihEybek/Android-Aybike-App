@@ -1,5 +1,8 @@
 package com.nexis.aybike.view
 
+import android.animation.Animator
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,9 +19,11 @@ import androidx.navigation.Navigation
 import com.android.billingclient.api.*
 import com.nexis.aybike.R
 import com.nexis.aybike.model.ShopSub
+import com.nexis.aybike.util.Singleton
 import com.nexis.aybike.util.show
 import com.nexis.aybike.viewmodel.VipsViewModel
 import kotlinx.android.synthetic.main.aybike_action_bar.*
+import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_vips.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -43,6 +48,10 @@ class VipsFragment : Fragment(), View.OnClickListener {
     private lateinit var flowParams: BillingFlowParams
     private lateinit var mSkuList : ArrayList<String>
     private lateinit var selectedShopSub: ShopSub
+
+    private var firstSelect: Boolean = false
+    private var firstIn: Int = 0
+    private var lastIn: Int = 0
 
     private fun init(){
         arguments?.let {
@@ -216,11 +225,49 @@ class VipsFragment : Fragment(), View.OnClickListener {
         selectedSubIn = sIn
 
         for (sub in vipTitleList.indices){
-            if (sub == sIn)
+            if (sub == sIn) {
+                if (firstSelect){
+                    firstIn = sIn
+                    firstSelect = true
+                    startQuestionOfDayScaleAnim(true, firstIn)
+                } else {
+                    lastIn = firstIn
+                    startQuestionOfDayScaleAnim(false, lastIn)
+                    firstIn = sIn
+                    startQuestionOfDayScaleAnim(true, firstIn)
+                }
+
                 setSubProperties(sub, true)
+            }
             else
                 setSubProperties(sub, false)
         }
+    }
+
+    private fun startQuestionOfDayScaleAnim(isBigAnim: Boolean, sIn: Int){
+        var xScale: Float = 0f
+        var yScale: Float = 0f
+
+        if (isBigAnim){
+            yScale = 1.15f
+            xScale = 1.15f
+        }
+        else{
+            yScale = 1f
+            xScale = 1f
+        }
+
+        val animatorSet: AnimatorSet = AnimatorSet()
+
+        val objectScaleAnimX: ObjectAnimator = ObjectAnimator.ofFloat(vipLinearList[sIn], "scaleX", xScale)
+        objectScaleAnimX.duration = 300
+
+        val objectScaleAnimY: ObjectAnimator = ObjectAnimator.ofFloat(vipLinearList[sIn], "scaleY", yScale)
+        objectScaleAnimY.duration = 300
+
+        animatorSet.playTogether(objectScaleAnimX)
+        animatorSet.playTogether(objectScaleAnimY)
+        animatorSet.start()
     }
 
     private fun setSubProperties(sIn: Int, isSelected: Boolean){

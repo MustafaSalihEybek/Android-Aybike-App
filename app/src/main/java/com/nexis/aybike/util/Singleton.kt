@@ -19,7 +19,7 @@ class Singleton {
         var dataIsSaved: Boolean = false
         var userVipStatus: Boolean = false
         var testCategoryName: String = ""
-        var correctAndWrongAmountTuple: Pair<Int, Int> = Pair(0, 0)
+        var choiceAmountList: Array<Int> = arrayOf(0, 0, 0, 0)
         lateinit var v: View
         lateinit var questionSolvedList: Array<Boolean>
 
@@ -48,8 +48,8 @@ class Singleton {
             }
         }
 
-        fun showSignUpDialog(v: View, message: String, isCancel: Boolean){
-            signUpDialog = SignUpDialog(v, message)
+        fun showSignUpDialog(v: View, message: String, isCancel: Boolean, fromMain: Boolean){
+            signUpDialog = SignUpDialog(v, message, fromMain)
             signUpDialog!!.setCancelable(isCancel)
             signUpDialog!!.show()
         }

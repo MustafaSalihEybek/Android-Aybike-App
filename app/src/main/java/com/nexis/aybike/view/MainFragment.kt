@@ -53,6 +53,7 @@ class MainFragment : Fragment(), View.OnClickListener {
     private var isOneHour: Boolean = false
     private var subsMutable: MutableList<Purchase>? = null
     private var userVipStatus: Boolean = false
+    private var scaleAnimIsStarted: Boolean = false
 
     private fun init(){
         arguments?.let {
@@ -107,8 +108,6 @@ class MainFragment : Fragment(), View.OnClickListener {
 
     private fun startQuestionOfDayAnim(isStart: Boolean){
         var xPos: Float = 0f
-        var xScale: Float = 0f
-        var yScale: Float = 0f
 
         if (Singleton.isCurrentMainPage){
             if (isStart)
@@ -117,29 +116,51 @@ class MainFragment : Fragment(), View.OnClickListener {
                 xPos = 200f
         }
 
-        if (isOneHour){
-            if (isStart){
-                yScale = 1f
-                xScale = 1f
-            }
-            else{
-                yScale = 1.25f
-                xScale = 1.25f
-            }
-        }
-
         val objectAnimX: ObjectAnimator = ObjectAnimator.ofFloat(main_fragment_txtQuestionOfDay, "x", xPos)
         objectAnimX.duration = 5000
 
         val animatorSet: AnimatorSet = AnimatorSet()
         animatorSet.playTogether(objectAnimX)
 
+        animatorSet.start()
+        animatorSet.addListener(object : Animator.AnimatorListener{
+            override fun onAnimationStart(p0: Animator?) {}
+
+            override fun onAnimationEnd(p0: Animator?) {
+                if (Singleton.isCurrentMainPage)
+                    startQuestionOfDayAnim(!isStart)
+            }
+
+            override fun onAnimationCancel(p0: Animator?) {}
+
+            override fun onAnimationRepeat(p0: Animator?) {
+            }
+        })
+    }
+
+    private fun startQuestionOfDayScaleAnim(isStart: Boolean){
+        var xScale: Float = 0f
+        var yScale: Float = 0f
+
+        if (isOneHour){
+            if (isStart){
+                yScale = 1f
+                xScale = 1f
+            }
+            else{
+                yScale = 1.15f
+                xScale = 1.15f
+            }
+        }
+
+        val animatorSet: AnimatorSet = AnimatorSet()
+
         if (isOneHour){
             val objectScaleAnimX: ObjectAnimator = ObjectAnimator.ofFloat(main_fragment_txtQuestionOfDay, "scaleX", xScale)
-            objectScaleAnimX.duration = 2500
+            objectScaleAnimX.duration = 500
 
             val objectScaleAnimY: ObjectAnimator = ObjectAnimator.ofFloat(main_fragment_txtQuestionOfDay, "scaleY", yScale)
-            objectScaleAnimY.duration = 2500
+            objectScaleAnimY.duration = 500
 
             animatorSet.playTogether(objectScaleAnimX)
             animatorSet.playTogether(objectScaleAnimY)
@@ -151,7 +172,7 @@ class MainFragment : Fragment(), View.OnClickListener {
 
             override fun onAnimationEnd(p0: Animator?) {
                 if (Singleton.isCurrentMainPage)
-                    startQuestionOfDayAnim(!isStart)
+                    startQuestionOfDayScaleAnim(!isStart)
             }
 
             override fun onAnimationCancel(p0: Animator?) {}
@@ -208,15 +229,17 @@ class MainFragment : Fragment(), View.OnClickListener {
             it?.let {
                 questionsOfDayList = it
 
-                randomIn = (0 until questionsOfDayList.size).random()
-                randomTest = questionsOfDayList.get(randomIn)
+                if (questionsOfDayList.size > 0){
+                    randomIn = (0 until questionsOfDayList.size).random()
+                    randomTest = questionsOfDayList.get(randomIn)
 
-                fullDateStr = AppUtils.getFullDateWithString()
+                    fullDateStr = AppUtils.getFullDateWithStringByTimeZone()
 
-                if (userId != null)
-                    mainViewModel.checkDayOfQuestion(userId!!, fullDateStr)
-                else
-                    setDayOfQuestionTxt(false)
+                    if (userId != null)
+                        mainViewModel.checkDayOfQuestion(userId!!, fullDateStr)
+                    else
+                        setDayOfQuestionTxt(false)
+                }
             }
         })
 
@@ -256,14 +279,16 @@ class MainFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setDayOfQuestionTxt(checkState: Boolean){
-        main_fragment_txtQuestionOfDay.setOnClickListener(this)
         startQuestionOfDayAnim(false)
+        main_fragment_txtQuestionOfDay.setOnClickListener(this)
 
         if (checkState){
-            main_fragment_txtQuestionOfDay.setTextColor(ContextCompat.getColor(v.context, R.color.questionOfDayTxtColor2))
+            main_fragment_txtQuestionOfDay.setBackgroundColor(ContextCompat.getColor(v.context, R.color.questionOfDayBgColor2))
+            main_fragment_relativeQuestionOfDay.setBackgroundColor(ContextCompat.getColor(v.context, R.color.questionOfDayBgColor2))
             main_fragment_txtQuestionOfDay.text = "Günün sorusu çözüldü"
         } else {
-            main_fragment_txtQuestionOfDay.setTextColor(ContextCompat.getColor(v.context, R.color.questionOfDayTxtColor))
+            main_fragment_txtQuestionOfDay.setBackgroundColor(ContextCompat.getColor(v.context, R.color.questionOfDayBgColor))
+            main_fragment_relativeQuestionOfDay.setBackgroundColor(ContextCompat.getColor(v.context, R.color.questionOfDayBgColor))
             timeIsStarted = true
             startTime()
         }
@@ -295,6 +320,11 @@ class MainFragment : Fragment(), View.OnClickListener {
             main_fragment_txtQuestionOfDay.text = "Günün Sorusuna Kalan Süre: $txtDifference"
 
             isOneHour = txtDifference.split(":")[0].toInt() <= 1
+
+            if (!scaleAnimIsStarted){
+                startQuestionOfDayScaleAnim(false)
+                scaleAnimIsStarted = true
+            }
         } catch (e: ParseException) {
             e.printStackTrace()
         }

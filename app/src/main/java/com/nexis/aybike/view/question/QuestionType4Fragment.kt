@@ -12,18 +12,20 @@ import com.nexis.aybike.R
 import com.nexis.aybike.databinding.FragmentQuestionType4Binding
 import com.nexis.aybike.model.Question
 import com.nexis.aybike.model.SubCategory
+import com.nexis.aybike.model.Test
 import com.nexis.aybike.util.AppUtils
 import com.nexis.aybike.util.Singleton
 import com.nexis.aybike.util.show
 import kotlinx.android.synthetic.main.fragment_question_type4.*
 
-class QuestionType4Fragment(val questionData: Question, val subCategoryData: SubCategory?, val qIn: Int, val qSize: Int) : Fragment(), View.OnClickListener {
+class QuestionType4Fragment(val testData: Test, val questionData: Question, val subCategoryData: SubCategory?, val qIn: Int, val qSize: Int) : Fragment(), View.OnClickListener {
     private lateinit var v: View
     private lateinit var questionType4Binding: FragmentQuestionType4Binding
 
     private lateinit var answerButtonList: Array<Button>
     private var isCreated: Boolean = false
     private var selectedAIn: Int = 0
+    private var choiceIn: Int = 0
 
     private fun init(){
         question_type4_fragment_txtQuestionContent.text = "$qIn-)${questionData.questionContent}"
@@ -95,21 +97,33 @@ class QuestionType4Fragment(val questionData: Question, val subCategoryData: Sub
     }
 
     fun checkTheAnswer(){
-        if (!answerButtonList.get(selectedAIn).text.toString().uppercase().equals(questionData.questionCorrectAnswer.uppercase())){
-            AppUtils.increaseCorrectAndWrongAmount(true)
+        if (subCategoryData != null){
+            if (subCategoryData.categoryId.equals("EntertainmentCategory")){
+                choiceIn = getChoiceIn(testData.testEndMessages)
+                AppUtils.increaseChoiceAmount(choiceIn)
+            } else {
+                if (!answerButtonList.get(selectedAIn).text.toString().uppercase().equals(questionData.questionCorrectAnswer.uppercase())){
+                    for (answer in answerButtonList.indices){
+                        if (answerButtonList.get(answer).text.toString().uppercase().equals(questionData.questionCorrectAnswer.uppercase())){
+                            setAnswerProperties(true, answer)
+                            setAnswerProperties(false, selectedAIn)
 
-            for (answer in answerButtonList.indices){
-                if (answerButtonList.get(answer).text.toString().uppercase().equals(questionData.questionCorrectAnswer.uppercase())){
-                    setAnswerProperties(true, answer)
-                    setAnswerProperties(false, selectedAIn)
-
-                    return
-                }
+                            return
+                        }
+                    }
+                } else
+                    setAnswerProperties(true, selectedAIn)
             }
-        } else{
-            AppUtils.increaseCorrectAndWrongAmount(false)
-            setAnswerProperties(true, selectedAIn)
         }
+    }
+
+    private fun getChoiceIn(messageList: ArrayList<String>) : Int {
+        for (m in messageList.indices){
+            if (m == selectedAIn)
+                return m
+        }
+
+        return 0
     }
 
     private fun setAnswerProperties(isCorrect: Boolean, aIn: Int) {

@@ -90,8 +90,8 @@ class QuestionsViewModel(application: Application) : BaseViewModel(application) 
     }
 
     fun getQuestionsFromOfDay(testId: String){
-        FirebaseUtils.mQuery = FirebaseUtils.mFireStore
-            .collection("QuestionsOfDay").document(testId).collection("Questions")
+        FirebaseUtils.mQuery = FirebaseUtils.mFireStore.collection("QuestionsOfDay")
+            .document(testId).collection("Questions")
         FirebaseUtils.mQuery.get()
             .addOnSuccessListener {
                 if (it.documents.size > 0){

@@ -166,6 +166,22 @@ class TestsAdapter(var testList: ArrayList<Test>, val subCategory: SubCategory, 
         } else {
             holder.txtViewAmount.text = "0"
             holder.txtLikedAmount.text = "0"
+            holder.imgHollowStar.visibility = View.VISIBLE
+            holder.imgHollowHeart.visibility = View.VISIBLE
+
+            holder.imgHollowStar.setOnClickListener {
+                aPos = holder.adapterPosition
+
+                if (aPos != RecyclerView.NO_POSITION)
+                    Singleton.showSignUpDialog(vV, "Bunu yapabilmek için giriş yapmanız gerekiyor!", true, true)
+            }
+
+            holder.imgHollowHeart.setOnClickListener {
+                aPos = holder.adapterPosition
+
+                if (aPos != RecyclerView.NO_POSITION)
+                    Singleton.showSignUpDialog(vV, "Bunu yapabilmek için giriş yapmanız gerekiyor!", true, true)
+            }
         }
 
         holder.imgTest.setOnClickListener {

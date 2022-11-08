@@ -29,9 +29,6 @@ class ExitTheTestWithTimeDialog(val v: View, val navDirections: NavDirections, v
             it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
 
-        println("SubCategoryId: $subCategoryId")
-        println("testId: $testId")
-
         exit_the_test_with_time_dialog_txtMessage.text = "Testten çıkarsanız $point şöhret puanı elde edemeyeceksiniz ve 3 gün boyunca bu teste giremeyeceksiniz, testten çıkmak istediğinize emin misiniz?"
         exit_the_test_with_time_dialog_btnNo.setOnClickListener(this)
         exit_the_test_with_time_dialog_btnYes.setOnClickListener(this)

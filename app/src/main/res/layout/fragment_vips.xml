@@ -28,13 +28,15 @@
         android:orientation="horizontal"
         android:weightSum="3"
         android:layout_marginTop="25dp"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="0.95"
+            android:layout_weight="1"
             android:padding="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginStart="15dp"
             android:gravity="center"
             android:id="@+id/vips_fragment_linearVip1"
@@ -94,15 +96,17 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1.1"
+            android:layout_weight="1"
             android:padding="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:id="@+id/vips_fragment_linearVip3"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:gravity="center"
             android:background="@drawable/vip_package_unselected_bg"
             android:orientation="vertical"
-            android:layout_height="260dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -115,7 +119,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/vips_fragment_txtVip3Content1"
                 android:textColor="@color/vipPackageTxtColor"
@@ -125,7 +129,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:layout_marginTop="5dp"
                 android:id="@+id/vips_fragment_txtVip3Content2"
                 android:textColor="@color/vipPackageTxtColor"
@@ -139,14 +143,14 @@
                 android:layout_marginTop="10dp"
                 android:id="@+id/vips_fragment_txtVip3Month"
                 android:textColor="@color/vipPackageTxtColor"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:fontFamily="@font/poppins_bold"
                 android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:text="68.99 TL"
-                android:textSize="18sp"
+                android:textSize="17sp"
                 android:id="@+id/vips_fragment_txtVip3Price"
                 android:textColor="@color/vipPackageTxtColor"
                 android:fontFamily="@font/poppins_bold"
@@ -156,8 +160,10 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="0.95"
+            android:layout_weight="1"
             android:padding="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:id="@+id/vips_fragment_linearVip2"
             android:layout_marginEnd="15dp"
             android:gravity="center"

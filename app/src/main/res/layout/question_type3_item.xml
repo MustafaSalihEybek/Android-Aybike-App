@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:padding="15dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginStart="25dp"
+    android:id="@+id/question_type3_item_linearAnswer"
+    android:layout_marginEnd="25dp"
+    android:background="@drawable/question_type3_bg"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="24dp"
+        android:id="@+id/question_type3_fragment_radioAnswer"
+        android:src="@drawable/question_circle_radio_unselected_bg"
+        android:layout_height="24dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Cevap"
+        android:id="@+id/question_type3_fragment_txtAnswer"
+        android:textSize="17sp"
+        android:fontFamily="@font/poppins_black"
+        android:textColor="@color/type3TxtColor"
+        android:layout_marginStart="10dp"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

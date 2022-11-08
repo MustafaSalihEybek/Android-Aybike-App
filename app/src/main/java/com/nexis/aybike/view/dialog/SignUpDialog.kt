@@ -9,10 +9,11 @@ import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import com.nexis.aybike.R
 import com.nexis.aybike.util.Singleton
+import com.nexis.aybike.view.MainFragmentDirections
 import com.nexis.aybike.view.question.QuestionsFragmentDirections
 import kotlinx.android.synthetic.main.sign_up_dialog.*
 
-class SignUpDialog(val v: View, val message: String) : Dialog(v.context), View.OnClickListener {
+class SignUpDialog(val v: View, val message: String, val fromMain: Boolean) : Dialog(v.context), View.OnClickListener {
     private lateinit var navDirections: NavDirections
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,10 +40,15 @@ class SignUpDialog(val v: View, val message: String) : Dialog(v.context), View.O
 
     private fun goToSignInPage(){
         closeThisDialog()
-        Singleton.closeCalculatePointDialog()
 
-        navDirections = QuestionsFragmentDirections.actionQuestionsFragmentToSignFragment(true)
-        Navigation.findNavController(v).navigate(navDirections)
+        if (!fromMain){
+            Singleton.closeCalculatePointDialog()
+            navDirections = QuestionsFragmentDirections.actionQuestionsFragmentToSignFragment(true)
+            Navigation.findNavController(v).navigate(navDirections)
+        } else {
+            navDirections = MainFragmentDirections.actionMainFragmentToSignFragment2(true)
+            Navigation.findNavController(v).navigate(navDirections)
+        }
     }
 
     private fun closeThisDialog(){

@@ -166,6 +166,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                         txtFullTime2 = AppUtils.getAddedDayTime(1)
                         txtFullTime3 = AppUtils.getAddedDayTime(2)
 
+                        println()
                         questionsViewModel.saveTestSolution(subCategoryId, testData.testId, userId!!, txtFullTime1, txtFullTime2, txtFullTime3)
                     } else {
                         Singleton.dataIsSaved = dataIsSaved
@@ -225,7 +226,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                         questionsViewPagerAdapter.addFragment(questionFragment)
                     }
 
-                    Singleton.correctAndWrongAmountTuple = Pair(0, 0)
+                    Singleton.choiceAmountList = arrayOf(0, 0, 0, 0)
                     Singleton.questionSolvedList = questionSolvedList
 
                     questions_fragment_viewPager.adapter = questionsViewPagerAdapter
@@ -285,14 +286,8 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
     private fun testEndCalculations(totalPoint: Float){
         subCategoryData?.let {
-            if (it.categoryId.equals("EntertainmentCategory")){
-                if (Singleton.correctAndWrongAmountTuple.first > Singleton.correctAndWrongAmountTuple.second)
-                    txtEndMessage = testData.testEndMessages.get(0)
-                else if (Singleton.correctAndWrongAmountTuple.second > Singleton.correctAndWrongAmountTuple.first)
-                    txtEndMessage = testData.testEndMessages.get(1)
-                else
-                    txtEndMessage = testData.testEndMessages.get(0)
-            }
+            if (it.categoryId.equals("EntertainmentCategory"))
+                txtEndMessage = testData.testEndMessages.get(getBiggestAmountIn(Singleton.choiceAmountList))
         }
 
         Singleton.showCalculatePointDialog(v, totalPoint, userId, testData, subCategoryData, categoryId, testDate, txtEndMessage)
@@ -303,7 +298,21 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         }
 
         if (userId.isNullOrEmpty())
-            Singleton.showSignUpDialog(v, signUpMessage, false)
+            Singleton.showSignUpDialog(v, signUpMessage, false, false)
+    }
+
+    private fun getBiggestAmountIn(choiceAmountList: Array<Int>) : Int{
+        var bigIn: Int = 0
+        var bigAmount: Int = choiceAmountList.get(0)
+
+        for (c in choiceAmountList.indices){
+            if (bigAmount < choiceAmountList.get(c)){
+                bigIn = c
+                bigAmount = choiceAmountList.get(c)
+            }
+        }
+
+        return bigIn
     }
 
     private fun shuffleTheQuestions(questions: ArrayList<Question>) : ArrayList<Question> {
@@ -322,11 +331,11 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
     private fun getFragment(question: Question, qIn: Int, qSize: Int) : Fragment{
         return when (question.questionType){
-            1 -> QuestionType1Fragment(question, subCategoryData, qIn, qSize)
-            2 -> QuestionType2Fragment(question, subCategoryData, qIn, qSize)
-            3 -> QuestionType3Fragment(question, subCategoryData, qIn, qSize)
-            4 -> QuestionType4Fragment(question, subCategoryData, qIn, qSize)
-            else -> QuestionType1Fragment(question, subCategoryData, 1, qSize)
+            1 -> QuestionType1Fragment(testData, question, subCategoryData, qIn, qSize)
+            2 -> QuestionType2Fragment(testData, question, subCategoryData, qIn, qSize)
+            3 -> QuestionType3Fragment(testData, question, subCategoryData, qIn, qSize)
+            4 -> QuestionType4Fragment(testData, question, subCategoryData, qIn, qSize)
+            else -> QuestionType1Fragment(testData, question, subCategoryData, 1, qSize)
         }
     }
 
@@ -387,7 +396,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
             updateUserPointForShare(userData!!)
         } else
-            Singleton.showSignUpDialog(v, shareMessage, true)
+            Singleton.showSignUpDialog(v, shareMessage, true, false)
     }
 
     private fun updateUserPointForShare(userData: User){
